@@ -1,0 +1,10 @@
+*.out
+model_checkpoints/
+model/
+embeds/
+data/tabular_data/Input_all_29_relation.tsv
+job_store_embeds.sh
+submit_job.sh
+tf_and_pt_embeds.py
+store_embeds.py
+custom_dataset.py
