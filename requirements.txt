@@ -22,6 +22,7 @@ filelock==3.8.0+computecanada
 Flask==2.2.2+computecanada
 flatbuffers==20190709135844+computecanada
 fonttools==4.38.0+computecanada
+functorch==0.2.0+computecanada
 gast==0.5.3+computecanada
 gitdb==4.0.9+computecanada
 GitPython==3.1.29+computecanada
@@ -50,6 +51,7 @@ matplotlib==3.6.1+computecanada
 mlflow==1.30.0
 numpy==1.23.0+computecanada
 oauthlib==3.2.0+computecanada
+opacus==1.2.0
 opt-einsum==3.3.0+computecanada
 packaging==21.3+computecanada
 pandas==1.5.0+computecanada

@@ -8,3 +8,4 @@ submit_job.sh
 tf_and_pt_embeds.py
 store_embeds.py
 custom_dataset.py
+out_files/
