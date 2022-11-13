@@ -54,13 +54,13 @@ def tf_bert_tokenize(texts, tokenizer, max_len=512):
 
 
 def tf_tokenizer():
-  m_url = "/home/rsaha/scratch/re_656_data/bert_en_uncased_L-12_H-768_A-12_4"
-  bert_layer = hub.KerasLayer(m_url, trainable=False)
+	m_url = "/home/rsaha/scratch/re_656_data/bert_en_uncased_L-12_H-768_A-12_4"
+	bert_layer = hub.KerasLayer(m_url, trainable=False)
 
-  vocab_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
-  do_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
-  tokenizer = tokenization.FullTokenizer(vocab_file, do_lower_case)
-  return tokenizer
+	vocab_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
+	do_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
+	tokenizer = tokenization.FullTokenizer(vocab_file, do_lower_case)
+	return tokenizer
 
 
 
@@ -131,34 +131,34 @@ def load_table_data(dataset_size='small'):
 # helper functions to read sentence level text
 
 def convertText_csv(path):
-  output: List[List[str]] = []
+	output: List[List[str]] = []
 
-  with open(path) as file:
-    lines = file.read()
-    lines =  lines.splitlines()
+	with open(path) as file:
+		lines = file.read()
+		lines =  lines.splitlines()
 
-  for line in lines:
-    line = line.strip()
-    input = line.split(sep="\t")
-    entity1 = input[0]
-    entity2 = input[1]
-    relation = input[2]
-    sentence = input[3]
+	for line in lines:
+		line = line.strip()
+		input = line.split(sep="\t")
+		entity1 = input[0]
+		entity2 = input[1]
+		relation = input[2]
+		sentence = input[3]
 
-    # sentence = sentence.replace('<e1>', '')
-    # sentence = sentence.replace('<e2>', '')
-    # sentence = sentence.replace('</e1>', '')
-    # sentence = sentence.replace('</e2>', '')
-    
-    output.append([sentence, entity1, entity2, relation])
-  return output
+		# sentence = sentence.replace('<e1>', '')
+		# sentence = sentence.replace('<e2>', '')
+		# sentence = sentence.replace('</e1>', '')
+		# sentence = sentence.replace('</e2>', '')
+		
+		output.append([sentence, entity1, entity2, relation])
+	return output
 
 def writeOutput(output, path):
-  with open(path, 'w', newline='') as f:
-    writer = csv.writer(f, delimiter='\t')
-    writer.writerow(["sentence", "entity1", "entity2", "relation"])
-    for i in output:
-      writer.writerow(i)
+    with open(path, 'w', newline='') as f:
+        writer = csv.writer(f, delimiter='\t')
+        writer.writerow(["sentence", "entity1", "entity2", "relation"])
+        for i in output:
+            writer.writerow(i)
 
 
 """## **Read Sententence-level Data**"""
@@ -177,3 +177,16 @@ def load_semeval_data(inputFilename, outputFilePath):
     label_mappings = integer_mapping = {i: l for i, l in enumerate(label.classes_)}
 
     return sentences, y, label_mappings
+  
+  
+def reformat(data, batch_size):
+    reformated_data = []
+    for i in range(batch_size):
+        temp_formated_data_dict = {}
+        temp_formated_data_dict['input_ids'] = torch.Tensor(data['input_ids'].numpy()[i]).long()
+        temp_formated_data_dict['attention_mask'] = torch.Tensor(data['attention_mask'].numpy()[i]).long()
+        temp_formated_data_dict['token_type_ids'] = torch.Tensor(data['token_type_ids'].numpy()[i]).long()
+        reformated_data.append(BatchEncoding(temp_formated_data_dict))
+    return reformated_data
+
+      

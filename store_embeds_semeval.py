@@ -92,18 +92,14 @@ X_train_texts, y_train_classes, label_mappings = load_semeval_data(train_directo
 
 X_test_texts, y_test_classes, map = load_semeval_data(test_directory_path, save_testcsvfile_path)
 
+#Encode the inputs and store them so that we don't have re-encode everytime we run the model.
 seeds = [0]   # Change the actual seed value here.
 all_train_last_hidden_states = []
 all_test_last_hidden_states = []
 # NOTE: Since colab is running out of memory, you can process this in batches and then concatenate the results. See if this works. If not, then move to Compute Canada.
 for seed in seeds:
-    #X_train_texts, X_test_texts, y_train_classes, y_test_classes = train_test_split(sentences, y, random_state=seed, test_size=0.2)
 
-    # slices = gen_batches(len(X_train_texts), 1000)
-    # for batch_num, s in enumerate(slices):
-        # print("Batch num: ", batch_num)
-
-        # Now do the tokenization and the encoding process.
+    # Now do the tokenization and the encoding process.
     train_tokens = bert_tokenize(X_train_texts, bert_tokenizer)
 
     test_tokens = bert_tokenize(X_test_texts, bert_tokenizer)

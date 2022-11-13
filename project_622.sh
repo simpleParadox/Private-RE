@@ -17,4 +17,4 @@ source ~/DP_RE/bin/activate
 python project_622.py
 
 #### For testing purposes only.
-###### salloc --cpus-per-task=1 --account=def-afyshe-ab --time=00:30:10 --mem=10G --gres=gpu:a100:1 
+###### salloc --cpus-per-task=1 --account=def-afyshe-ab --time=00:30:10 --mem=10G --gres=gpu:a100:1

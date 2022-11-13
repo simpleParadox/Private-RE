@@ -22,9 +22,8 @@ import torch.optim as optim
 import transformers
 from transformers import BertModel, BertTokenizer
 
-# Import opacus to for privacy.
+# Import opacus to make everything private.
 from opacus import PrivacyEngine
-from opacus.layers import dp_rnn
 
 # Import scikit-learn packages.
 from sklearn import preprocessing
@@ -61,19 +60,17 @@ device = "cuda:0" if torch.cuda.is_available() else "cpu"
 """
 
 class erin_model(nn.Module):
-    def __init__(self, in_size=768, hidden_size: int = 1, num_relations: int = 29, sequence_length:int = 50, private=False):
+    def __init__(self, in_size=768, hidden_size: int = 1, num_relations: int = 29, sequence_length:int = 50):
         super(erin_model,self).__init__()
         
         # Just add one LSTM unit as the model followed by a fully connected layer and then a softmax.
-        if private:
-            self.lstm = dp_rnn.DPLSTM(input_size=in_size, hidden_size=hidden_size, num_layers=1, batch_first=True)
-        else:
-            self.lstm = nn.LSTM(input_size=in_size, hidden_size=hidden_size, num_layers=1, batch_first=True)
+        self.lstm = nn.LSTM(input_size=in_size, hidden_size=hidden_size, num_layers=1, batch_first=True)
         self.fc = nn.Linear(sequence_length*hidden_size, num_relations)
 
     def forward(self, x):
         # First get the bert embeddings.
         # Then do the forward pass.
+
         x, (h_n, c_n) = self.lstm(x)
         x = torch.flatten(x, 1)
         x = self.fc(x)
@@ -112,14 +109,13 @@ load_epochs = epochs - 5
 make_private = True
 EPSILON = 4
 DELTA = 1e-5
-MAX_GRAD_NORM = 1.0
-NOISE_MULTIPLIER = 1.5
+MAX_GRAD_NORM = 1.2
 
 
 model_load_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/sgd/epoch_{load_epochs}_{optimizer_name}_{learning_rate}_tf_encode_dataloader.pt"
 model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/sgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_tf_encode_dataloader.pt"
 # Define the model and the required optimizer and loss function.
-model = erin_model(sequence_length=sequence_max_length, private=True) # Using default model dimensions.
+model = erin_model(sequence_length=sequence_max_length) # Using default model dimensions.
 model.to(device)  # Make sure you have this before loading an existing model.
 if optimizer_name == 'RMSProp':
     optimizer = optim.RMSprop(model.parameters(), lr=learning_rate)
@@ -160,7 +156,7 @@ for seed in seeds:
 
     print("Seed: ", seed)
     # First get the split of the training and test set.
-    X_train, X_test, y_train_classes, y_test_classes  = train_test_split(sentences, y, random_state=seed, test_size=0.2)
+    X_train, X_test, y_train_classes, y_test_classes  = train_test_split(sentences[:100], y[:100], random_state=seed, test_size=0.2)
     X_train_subset, X_val_subset, y_train_subset, y_val_subset = train_test_split(X_train, y_train_classes, random_state=seed, test_size=0.50)  # Getting a 50% split on the train set from the previous line is equal to a 40% train-val split on the whole dataset. This line is not necessary.
     
     # Specifying this to make sure that we are using the whole dataset.
@@ -187,25 +183,17 @@ for seed in seeds:
 
     if make_private:
         privacy_engine = PrivacyEngine()
-        # model, optimizer, train_dataloader = privacy_engine.make_private_with_epsilon(
-        #     module=model,
-        #     optimizer=optimizer,
-        #     data_loader=train_dataloader,
-        #     epochs=load_epochs,
-        #     target_epsilon=EPSILON,
-        #     target_delta=DELTA,
-        #     max_grad_norm=MAX_GRAD_NORM   
-        # )
-        model, optimizer, train_dataloader = privacy_engine.make_private(
+        model, optimizer, train_dataloader = privacy_engine.make_private_with_epsilon(
             module=model,
             optimizer=optimizer,
             data_loader=train_dataloader,
-            noise_multiplier=load_epochs,
+            epochs=load_epochs,
+            target_epsilon=EPSILON,
+            target_delta=DELTA,
             max_grad_norm=MAX_GRAD_NORM   
         )
     log_param("Epsilon", EPSILON)
     log_param("Delta", DELTA)
-    log_param("Noise multiplier", NOISE_MULTIPLIER)
     log_param("Max Grad Norm", MAX_GRAD_NORM)
 
     
@@ -216,10 +204,7 @@ for seed in seeds:
         running_loss = 0.0
         for batch_index, data in enumerate(train_dataloader):
             inputs, batch_y_train_classes = data
-            # print("Inputs from private dataloader: ", inputs)
-            inputs_size = inputs['input_ids'].size(0)
-            # print("Inputs batch size", inputs_size)
-            inputs = reformat(inputs, inputs_size)  # Reformat data for the custom dataset.
+            inputs = reformat(inputs, batch_size)  # Reformat data for the custom dataset.
             last_hidden_states_train = get_bert_embeds_from_tokens(bert_model, inputs)
 
             inputs_tensor = torch.Tensor(last_hidden_states_train)
@@ -234,7 +219,6 @@ for seed in seeds:
 
             # # Forward pass.
             outputs = model(inputs_tensor)            
-            # print("outputs size: ", outputs.size())
             
             # Calculate loss.
             loss = criterion(outputs, batch_labels_tensor)
@@ -250,13 +234,12 @@ for seed in seeds:
             running_loss += training_loss
             # if i % 1000 == 999:
             # print(f'[{epoch + 1}, {i + 1:5d}] loss: {running_loss / len(inputs) :.3f}')
-            if batch_index % 100 == 0:
-                batch_loss = training_loss / inputs_size
-                print(f"Batch loss at batch {batch_index}: ", training_loss / inputs_size, flush=True)
-                log_metric("Batch losses", batch_loss)
+            if batch % 100 == 0:
+                batch_loss = training_loss / batch_size
+                print(f"Batch loss at batch {batch}: ", training_loss / batch_size, flush=True)
+                log_metric("Epoch losses", batch_loss)
         epoch_loss = running_loss / len(all_train_tokens)
         epoch_losses.append(epoch_loss)
-        log_metric("Epoch loss", epoch_loss)
         print(f"Epoch {epoch + 1} loss : ", epoch_loss, flush=True)
     print("All epoch losses: ", epoch_losses)
     print("Finished model training.")
@@ -299,8 +282,7 @@ for seed in seeds:
         correct = 0.0
         for batch_index in enumerate(test_dataloader):
             test_inputs, batch_y_test_classes = data
-            test_inputs_size = test_inputs['input_ids'].size(0)
-            test_inputs = reformat(test_inputs, test_inputs_size)  # Reformat data for the custom dataset.
+            test_inputs = reformat(test_inputs, batch_size)  # Reformat data for the custom dataset.
             last_hidden_states_test = get_bert_embeds_from_tokens(bert_model, test_inputs)
             
             inputs_tensor_test = torch.Tensor(last_hidden_states_test)
@@ -319,10 +301,8 @@ for seed in seeds:
         
             all_predictions.extend(predicted.cpu().int().numpy())
             all_test_labels.extend(batch_labels_tensor_test.cpu().int().numpy())
-        print("All predictions: ", all_predictions)
-        print("All test labels: ", all_test_labels)
         # Calculate test accuracy and F1 here.
-        f1 = f1_score(all_predictions, all_test_labels, average='macro')
+        f1 = f1_score(all_predictions, all_test_labels)
         test_accuracy = 100 * correct / total
         print(f'Test accuracy for seed {seed}: {100 * correct / total} %')
         print(f"Test f1 is: {f1}")
