@@ -103,7 +103,7 @@ else:
 
 
 # Define model parameters.
-seeds = [0]   # Change the actual seed value here.
+seeds = [1]   # Change the actual seed value here.
 batch_size = 16
 epochs = 5
 optimizer_name = "Adam" # DP-SGD, DP-Adam, Adam, SGD
@@ -115,9 +115,15 @@ DELTA = 1e-5
 MAX_GRAD_NORM = 1.0
 NOISE_MULTIPLIER = 1.5
 
+print("Is private? ", make_private)
 
-model_load_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/sgd/epoch_{load_epochs}_{optimizer_name}_{learning_rate}_tf_encode_dataloader.pt"
-model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/sgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_tf_encode_dataloader.pt"
+if make_private:
+    model_load_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/dpsgd/epoch_{load_epochs}_{optimizer_name}_{learning_rate}_private_seed_{seeds[0]}.pt"
+    model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/dpsgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_private_seed_{seeds[0]}.pt"
+else:
+    model_load_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/sgd/epoch_{load_epochs}_{optimizer_name}_{learning_rate}_seed_{seeds[0]}.pt"
+    model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/sgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_seed_{seeds[0]}.pt"
+
 # Define the model and the required optimizer and loss function.
 model = erin_model(sequence_length=sequence_max_length, private=True) # Using default model dimensions.
 model.to(device)  # Make sure you have this before loading an existing model.
@@ -132,7 +138,8 @@ elif optimizer_name == 'SGD':
 
 
 
-if (epochs - 5) > 0:
+if load_epochs > 0 and make_private==False:
+    # Only for loading the non-private model. If you try to load the private model checkpoint then it will throw an error. To load a private model, you have to use the PrivacyEnging class to first make the model private and then load the saved model. This is done later after the encoding step.
     print("Loading an existing model from checkpoint.", flush=True)
     checkpoint = torch.load(model_load_path)
     model.load_state_dict(checkpoint['model_state_dict'])
@@ -157,6 +164,7 @@ for seed in seeds:
     log_param("Optimizer", optimizer_name)
     log_param("Learning rate", learning_rate)
     log_param("Private", make_private)
+    log_param("Sequence length", sequence_max_length)
 
     print("Seed: ", seed)
     # First get the split of the training and test set.
@@ -187,31 +195,27 @@ for seed in seeds:
 
     if make_private:
         privacy_engine = PrivacyEngine()
-        # model, optimizer, train_dataloader = privacy_engine.make_private_with_epsilon(
-        #     module=model,
-        #     optimizer=optimizer,
-        #     data_loader=train_dataloader,
-        #     epochs=load_epochs,
-        #     target_epsilon=EPSILON,
-        #     target_delta=DELTA,
-        #     max_grad_norm=MAX_GRAD_NORM   
-        # )
         model, optimizer, train_dataloader = privacy_engine.make_private(
             module=model,
             optimizer=optimizer,
             data_loader=train_dataloader,
-            noise_multiplier=load_epochs,
-            max_grad_norm=MAX_GRAD_NORM   
+            noise_multiplier=NOISE_MULTIPLIER,
+            max_grad_norm=MAX_GRAD_NORM,
+            poisson_sampling=False
         )
-    log_param("Epsilon", EPSILON)
-    log_param("Delta", DELTA)
-    log_param("Noise multiplier", NOISE_MULTIPLIER)
-    log_param("Max Grad Norm", MAX_GRAD_NORM)
+        if load_epochs > 0:
+            print(f"Load private model from {model_load_path}")
+            checkpoint = torch.load(model_load_path)
+            model.load_state_dict(checkpoint['model_state_dict'])
+            optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+            model.train()  # This is important
 
+        log_param("Noise multiplier", NOISE_MULTIPLIER)
+        log_param("Max Grad Norm", MAX_GRAD_NORM)
     
     print("Starting model training.", flush=True)
     epoch_losses = []
-    for epoch in range(epochs - 5, epochs):
+    for epoch in range(load_epochs, epochs):
         print("Epoch: ", epoch)
         running_loss = 0.0
         for batch_index, data in enumerate(train_dataloader):
@@ -253,26 +257,29 @@ for seed in seeds:
             if batch_index % 100 == 0:
                 batch_loss = training_loss / inputs_size
                 print(f"Batch loss at batch {batch_index}: ", training_loss / inputs_size, flush=True)
-                log_metric("Batch losses", batch_loss)
+                # log_metric("Batch losses", batch_loss)
         epoch_loss = running_loss / len(all_train_tokens)
         epoch_losses.append(epoch_loss)
         log_metric("Epoch loss", epoch_loss)
+        if make_private:
+            # Log the epsilon value.
+            log_metric("Epsilon budget per epoch", privacy_engine.get_epsilon(DELTA))
         print(f"Epoch {epoch + 1} loss : ", epoch_loss, flush=True)
     print("All epoch losses: ", epoch_losses)
     print("Finished model training.")
     
-    # Log epoch losses.
+    
+    
 
 
     # ### Save model to disk.
     
-    # torch.save({
-    #         'epoch': epoch,
-    #         'model_state_dict': model.state_dict(),
-    #         'optimizer_state_dict': optimizer.state_dict(),
-    #         'loss': epoch_loss,
-    #         }, model_save_path)
-    
+    torch.save({
+            'epoch': epoch,
+            'model_state_dict': model.state_dict(),
+            'optimizer_state_dict': optimizer.state_dict(),
+            'loss': epoch_loss,
+            }, model_save_path)
 
     # """Run predictions on the trained model."""
     
@@ -319,8 +326,8 @@ for seed in seeds:
         
             all_predictions.extend(predicted.cpu().int().numpy())
             all_test_labels.extend(batch_labels_tensor_test.cpu().int().numpy())
-        print("All predictions: ", all_predictions)
-        print("All test labels: ", all_test_labels)
+        # print("All predictions: ", all_predictions)
+        # print("All test labels: ", all_test_labels)
         # Calculate test accuracy and F1 here.
         f1 = f1_score(all_predictions, all_test_labels, average='macro')
         test_accuracy = 100 * correct / total
