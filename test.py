@@ -45,7 +45,6 @@ import csv
 from typing import List
 from torchinfo import summary
 from mlflow import log_metric, log_param, log_artifacts
-import sys
 
 # Custom functions.
 from functions import get_bert_embeds_from_tokens, bert_tokenize, load_table_data, load_semeval_data, tf_tokenizer, tf_bert_tokenize, reformat
@@ -54,12 +53,6 @@ from custom_dataset import TableDataset
 
 # Using gpu if available.
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
-
-noise_arg = float(sys.argv[1])  # This is the noise_multiplier argument.
-print("Noise arg: ", noise_arg)
-epoch_arg = int(sys.argv[2])  # This is the epoch argument.
-seed_arg = int(sys.argv[3])
-print("Seed arg: ", seed_arg)
 
 
 """## Model definition and training
@@ -90,8 +83,8 @@ class erin_model(nn.Module):
 
 sequence_max_length = 50
 # Define BertTokenizer and BertModel
-bert_tokenizer = BertTokenizer.from_pretrained('/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert_uncased/vocab.txt', model_max_length=sequence_max_length, padding_side='right', local_files_only=True)#, config='/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/tokenizer_config.json')
-bert_model = BertModel.from_pretrained('/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert_uncased/', local_files_only=True)#, config='/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/config.json')
+bert_tokenizer = BertTokenizer.from_pretrained('/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/vocab.txt', model_max_length=sequence_max_length, padding_side='right', local_files_only=True)#, config='/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/tokenizer_config.json')
+bert_model = BertModel.from_pretrained('/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/', local_files_only=True)#, config='/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/config.json')
 bert_model = bert_model.to(device)
 
 
@@ -110,23 +103,23 @@ else:
 
 
 # Define model parameters.
-seeds = [seed_arg]   # Change the actual seed value here.
+seeds = [0]   # Change the actual seed value here.
 batch_size = 16
-epochs = epoch_arg
+epochs = 10
 optimizer_name = "Adam" # DP-SGD, DP-Adam, Adam, SGD
 learning_rate = 0.001
 load_epochs = epochs - 5
-make_private = False
+make_private = True
 EPSILON = 4
 DELTA = 1e-5
 MAX_GRAD_NORM = 1.0
-NOISE_MULTIPLIER = noise_arg
+NOISE_MULTIPLIER = 1.5
 
 print("Is private? ", make_private)
 
 if make_private:
     model_load_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/dpsgd/epoch_{load_epochs}_{optimizer_name}_{learning_rate}_private_seed_{seeds[0]}.pt"
-    model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/dpsgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_private_seed_{seeds[0]}_noise_{int(noise_arg*100.0)}.pt"
+    model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/dpsgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_private_seed_{seeds[0]}.pt"
 else:
     model_load_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/sgd/epoch_{load_epochs}_{optimizer_name}_{learning_rate}_seed_{seeds[0]}.pt"
     model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/sgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_seed_{seeds[0]}.pt"
@@ -141,14 +134,16 @@ elif optimizer_name == 'Adam':
 elif optimizer_name == 'SGD':
     optimizer = optim.SGD(model.parameters(), lr=learning_rate)
 
+# Log hyper-parameters using MLFlow here.
 
-if load_epochs > 0 and make_private==False:
-    # Only for loading the non-private model. If you try to load the private model checkpoint then it will throw an error. To load a private model, you have to use the PrivacyEnging class to first make the model private and then load the saved model. This is done later after the encoding step.
-    print("Loading an existing model from checkpoint.", flush=True)
-    checkpoint = torch.load(model_load_path)
-    model.load_state_dict(checkpoint['model_state_dict'])
-    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-    model.train()  # This is important
+
+
+# if load_epochs > 0:
+#     print("Loading an existing model from checkpoint.", flush=True)
+#     checkpoint = torch.load(model_load_path, map_location=torch.device('cpu'))
+#     model.load_state_dict(checkpoint['model_state_dict'])
+#     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+#     model.train()  # This is important
     
 
 print("Model summary: ", summary(model, input_size=(batch_size, sequence_max_length, 768)))
@@ -172,7 +167,7 @@ for seed in seeds:
 
     print("Seed: ", seed)
     # First get the split of the training and test set.
-    X_train, X_test, y_train_classes, y_test_classes  = train_test_split(sentences, y, random_state=seed, test_size=0.2)
+    X_train, X_test, y_train_classes, y_test_classes  = train_test_split(sentences[:100], y[:100], random_state=seed, test_size=0.2)
     X_train_subset, X_val_subset, y_train_subset, y_val_subset = train_test_split(X_train, y_train_classes, random_state=seed, test_size=0.50)  # Getting a 50% split on the train set from the previous line is equal to a 40% train-val split on the whole dataset. This line is not necessary.
     
     # Specifying this to make sure that we are using the whole dataset.
@@ -207,15 +202,14 @@ for seed in seeds:
             max_grad_norm=MAX_GRAD_NORM,
             poisson_sampling=False
         )
-        if load_epochs > 0:
-            print(f"Load private model from {model_load_path}")
-            checkpoint = torch.load(model_load_path)
-            model.load_state_dict(checkpoint['model_state_dict'])
-            optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-            model.train()  # This is important
-
         log_param("Noise multiplier", NOISE_MULTIPLIER)
         log_param("Max Grad Norm", MAX_GRAD_NORM)
+        print(f"Loading model from {model_load_path}")
+        checkpoint = torch.load(model_load_path)
+        model.load_state_dict(checkpoint['model_state_dict'])
+        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+    model.train()
+
     
     print("Starting model training.", flush=True)
     epoch_losses = []
@@ -272,6 +266,9 @@ for seed in seeds:
     print("All epoch losses: ", epoch_losses)
     print("Finished model training.")
     
+    
+    
+
 
     # ### Save model to disk.
     
@@ -281,6 +278,7 @@ for seed in seeds:
             'optimizer_state_dict': optimizer.state_dict(),
             'loss': epoch_loss,
             }, model_save_path)
+    
 
     # """Run predictions on the trained model."""
     

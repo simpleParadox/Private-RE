@@ -65,9 +65,22 @@ class erin_model(nn.Module):
 
 
 sequence_max_length = 50
+
+# --- Subject & object markup ---
+SUB_START_CHAR = "<e1>"
+SUB_END_CHAR = "</e1>"
+OBJ_START_CHAR = "<e2>"
+OBJ_END_CHAR = "</e2>"
+
+added_special_token = [SUB_START_CHAR, SUB_END_CHAR, OBJ_START_CHAR, OBJ_END_CHAR]
+
 # Define BertTokenizer and BertModel
-bert_tokenizer = BertTokenizer.from_pretrained('/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/vocab.txt', model_max_length=sequence_max_length, padding_side='right', local_files_only=True)#, config='/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/tokenizer_config.json')
+bert_tokenizer = BertTokenizer.from_pretrained(
+    '/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/vocab.txt', model_max_length=sequence_max_length, padding_side='right', local_files_only=True,
+    additional_special_tokens = added_special_token
+    )
 bert_model = BertModel.from_pretrained('/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/', local_files_only=True)#, config='/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/config.json')
+bert_model.resize_token_embeddings(len(bert_tokenizer))
 bert_model = bert_model.to(device)
 
 
@@ -91,14 +104,14 @@ if data_name == 'table':
     sentences, y, label_mappings = load_table_data()  # By default it loads the smaller version of the dataset.
 else:
     # Load semeval data:
-    X_train_texts, y_train_classes, label_mappings = load_semeval_data(train_directory_path, save_traincsvfile_path)
-    X_test_texts, y_test_classes, l_map = load_semeval_data(test_directory_path, save_testcsvfile_path)
+    X_train, y_train_classes, label_mappings = load_semeval_data(train_directory_path, save_traincsvfile_path)
+    X_test, y_test_classes, l_map = load_semeval_data(test_directory_path, save_testcsvfile_path)
 
 
 # Define model parameters.
 seeds = [0]   # Change the actual seed value here.
 batch_size = 16
-epochs = 10
+epochs = 5
 optimizer_name = "Adam" # DP-SGD, DP-Adam, Adam, SGD
 learning_rate = 0.001
 load_epochs = epochs - 5
@@ -142,7 +155,7 @@ if load_epochs > 0 and make_private==False:
 print("Model summary: ", summary(model, input_size=(batch_size, sequence_max_length, 768)))
 # optimizer = optim.DPSGD(params=model.parameters(), **training_parameters)  # Define training parameters.
 
-tf_bert_tokenizer = tf_tokenizer()
+# tf_bert_tokenizer = tf_tokenizer()
 # epsilon = analysis.epsilon(**training_parameters)
 criterion = nn.CrossEntropyLoss()
 
@@ -172,8 +185,8 @@ for seed in seeds:
         sentence_batch = X_train_subset[batch:batch+batch_size]
         
         # Tokenize the data.
-        # train_tokens = bert_tokenize(sentence_batch, bert_tokenizer)
-        train_tokens = tf_bert_tokenize(sentence_batch, tf_bert_tokenizer, max_len=sequence_max_length)
+        train_tokens = bert_tokenize(sentence_batch, bert_tokenizer)
+        # train_tokens = tf_bert_tokenize(sentence_batch, tf_bert_tokenizer, max_len=sequence_max_length)
         # print("Train tokens: ", train_tokens)
         # print("Type train tokens: ", type(train_tokens))
         all_train_tokens.extend(train_tokens)
@@ -281,8 +294,8 @@ for seed in seeds:
         sentence_batch = X_test[batch:batch+batch_size]
         
         # Tokenize the data.
-        # test_tokens = bert_tokenize(sentence_batch, bert_tokenizer)
-        test_tokens = tf_bert_tokenize(sentence_batch, tf_bert_tokenizer, max_len=sequence_max_length)
+        test_tokens = bert_tokenize(sentence_batch, bert_tokenizer)
+        #test_tokens = tf_bert_tokenize(sentence_batch, tf_bert_tokenizer, max_len=sequence_max_length)
         all_test_tokens.extend(test_tokens)
         # Get bert embeddings for the data.
     print("Test data encoding complete.")
