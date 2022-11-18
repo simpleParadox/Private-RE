@@ -6,7 +6,7 @@
 #SBATCH --gres=gpu:a100:1        # request GPU "generic resource"
 #SBATCH --cpus-per-task=1   # maximum CPU cores per GPU request: 6 on Cedar, 16 on Graham.
 #SBATCH --mem=20G       # memory per node
-#SBATCH --time=6:30:00      # time (DD-HH:MM)
+#SBATCH --time=2:30:00      # time (DD-HH:MM)
 #SBATCH --job-name=testing_semeval_data_Adam_001_private
 #SBATCH --output=out_files/%x-%j.out  # %N for node name, %j for jobID
 #SBATCH --account=def-afyshe-ab

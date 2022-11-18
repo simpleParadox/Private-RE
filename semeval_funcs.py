@@ -28,14 +28,18 @@ def tf_bert_tokenize(texts, tokenizer, max_len=512):
     
     for text in texts:
       current_tokenized_data = {}
-      text = tokenizer.tokenize(text)
-        
+      #tokenizer.add_special_tokens(added_special_token)
       text = text[:max_len-2]
-      input_sequence = "[CLS]" + " " + text + " " + "[SEP]"
-      pad_len = max_len-len(input_sequence)
+      print(text)
+      marked_text = "[CLS] " + text + " [SEP]"
+      tokenized_text = tokenizer.tokenize(marked_text)
+      print(tokenized_text)
+      indexed_tokens = tokenizer.convert_tokens_to_ids(tokenized_text)
+      print(indexed_tokens)
+      pad_len = max_len-len(indexed_tokens)
       
-      tokens = tokenizer.convert_tokens_to_ids(input_sequence) + [0] * pad_len
-      pad_masks = [1] * len(input_sequence) + [0] * pad_len
+      tokens = tokenizer.convert_tokens_to_ids(indexed_tokens) + [0] * pad_len
+      pad_masks = [1] * len(indexed_tokens) + [0] * pad_len
       segment_ids = [0] * max_len
       
       current_tokenized_data['input_ids'] = torch.Tensor([tokens]).long()
@@ -169,7 +173,7 @@ def load_semeval_data(inputFilename, outputFilePath):
 
     data = shuffle(data, random_state = 1) 
 
-    features = data.iloc[:,:-1].values.tolist()
+    features = data.iloc[:,:1].values.tolist()
     sentences = [' '.join(i).strip() for i in features]
 
     label = preprocessing.LabelEncoder()
