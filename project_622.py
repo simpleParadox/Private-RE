@@ -55,8 +55,8 @@ from custom_dataset import TableDataset
 # Using gpu if available.
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
-noise_arg = float(sys.argv[1])  # This is the noise_multiplier argument.
-print("Noise arg: ", noise_arg)
+epsilon_arg = float(sys.argv[1])  # This is the noise_multiplier argument.
+print("Epsilon arg: ", epsilon_arg)
 epoch_arg = int(sys.argv[2])  # This is the epoch argument.
 seed_arg = int(sys.argv[3])
 print("Seed arg: ", seed_arg)
@@ -90,8 +90,8 @@ class erin_model(nn.Module):
 
 sequence_max_length = 50
 # Define BertTokenizer and BertModel
-bert_tokenizer = BertTokenizer.from_pretrained('/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert_uncased/vocab.txt', model_max_length=sequence_max_length, padding_side='right', local_files_only=True)#, config='/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/tokenizer_config.json')
-bert_model = BertModel.from_pretrained('/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert_uncased/', local_files_only=True)#, config='/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/config.json')
+# bert_tokenizer = BertTokenizer.from_pretrained('/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert_uncased/bert_uncased/vocab.txt', model_max_length=sequence_max_length, padding_side='right', local_files_only=True)#, config='/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/tokenizer_config.json')
+bert_model = BertModel.from_pretrained('/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert_uncased/bert_uncased/', local_files_only=True)#, config='/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/config.json')
 bert_model = bert_model.to(device)
 
 
@@ -108,6 +108,7 @@ else:
     # Load semeval data:
     sentences, y, label_mappings = load_semeval_data(input_file_name, output_file_path)
 
+log_param("Dataset", 'Table')
 
 # Define model parameters.
 seeds = [seed_arg]   # Change the actual seed value here.
@@ -116,17 +117,16 @@ epochs = epoch_arg
 optimizer_name = "Adam" # DP-SGD, DP-Adam, Adam, SGD
 learning_rate = 0.001
 load_epochs = epochs - 5
-make_private = False
-EPSILON = 4
+make_private = True
+EPSILON = epsilon_arg
 DELTA = 1e-5
 MAX_GRAD_NORM = 1.0
-NOISE_MULTIPLIER = noise_arg
 
 print("Is private? ", make_private)
 
 if make_private:
     model_load_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/dpsgd/epoch_{load_epochs}_{optimizer_name}_{learning_rate}_private_seed_{seeds[0]}.pt"
-    model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/dpsgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_private_seed_{seeds[0]}_noise_{int(noise_arg*100.0)}.pt"
+    model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/dpsgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_private_seed_{seeds[0]}_epsilon_{int(EPSILON*100.0)}.pt"
 else:
     model_load_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/sgd/epoch_{load_epochs}_{optimizer_name}_{learning_rate}_seed_{seeds[0]}.pt"
     model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/sgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_seed_{seeds[0]}.pt"
@@ -199,11 +199,13 @@ for seed in seeds:
 
     if make_private:
         privacy_engine = PrivacyEngine()
-        model, optimizer, train_dataloader = privacy_engine.make_private(
+        model, optimizer, train_dataloader = privacy_engine.make_private_with_epsilon(
             module=model,
             optimizer=optimizer,
             data_loader=train_dataloader,
-            noise_multiplier=NOISE_MULTIPLIER,
+            target_epsilon=EPSILON,
+            target_delta=DELTA,
+            epochs = epochs,
             max_grad_norm=MAX_GRAD_NORM,
             poisson_sampling=False
         )
@@ -214,7 +216,8 @@ for seed in seeds:
             optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
             model.train()  # This is important
 
-        log_param("Noise multiplier", NOISE_MULTIPLIER)
+        log_param("DELTA", DELTA)
+        log_param("EPSILON", EPSILON)
         log_param("Max Grad Norm", MAX_GRAD_NORM)
     
     print("Starting model training.", flush=True)
