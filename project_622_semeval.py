@@ -1,6 +1,6 @@
 from typing import List
 
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import numpy as np
 # Import scientific computing python packages.
 import pandas as pd
@@ -52,7 +52,7 @@ class erin_model(nn.Module):
         else:
             self.lstm = nn.LSTM(input_size=in_size, hidden_size=hidden_size, num_layers=1, batch_first=True)
         self.fc = nn.Linear(sequence_length*hidden_size, num_relations)
-        print("Private or non-private....: ", private)
+        print("Inside Erin model - Private or non-private....: ", private)
 
     def forward(self, x):
         # First get the bert embeddings.
@@ -300,7 +300,7 @@ for seed in seeds:
         # Get bert embeddings for the data.
     print("Test data encoding complete.")
 
-    test_dataset = TableDataset(all_test_tokens, y_test_classes)
+    test_dataset = SemevalDataset(all_test_tokens, y_test_classes)
     test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
     
     print("Testing on test data.")
@@ -331,8 +331,9 @@ for seed in seeds:
         
             all_predictions.extend(predicted.cpu().int().numpy())
             all_test_labels.extend(batch_labels_tensor_test.cpu().int().numpy())
-        # print("All predictions: ", all_predictions)
-        # print("All test labels: ", all_test_labels)
+        print("All predictions: ", all_predictions)
+        print("All test labels: ", all_test_labels)
+        print(f"correct, total: {correct}, {total}")
         # Calculate test accuracy and F1 here.
         f1 = f1_score(all_predictions, all_test_labels, average='macro')
         test_accuracy = 100 * correct / total
