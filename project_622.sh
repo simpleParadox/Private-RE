@@ -16,7 +16,7 @@ module load cuda cudnn
 source ~/DP_RE/bin/activate
 # python store_embeds.py
 # Order of command-line args -> Noise_multiplier, epochs, seed
-python project_622.py 0.1 5 $SLURM_ARRAY_TASK_ID
+python project_622.py 0.5 5 $SLURM_ARRAY_TASK_ID
 
 #### For testing purposes only.
 ###### salloc --cpus-per-task=1 --account=def-afyshe-ab --time=00:30:10 --mem=6G --gres=gpu:a100:1
