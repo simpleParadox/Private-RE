@@ -1,9 +1,3 @@
-from sklearn import preprocessing
-from sklearn.model_selection import train_test_split
-from sklearn.model_selection import KFold
-from sklearn.utils import shuffle
-from sklearn.metrics import f1_score
-from sklearn.utils import gen_batches
 import pandas as pd
 import numpy as np
 import csv
@@ -54,7 +48,7 @@ def tf_bert_tokenize(texts, tokenizer, max_len=512):
 
 
 def tf_tokenizer():
-	m_url = "/home/rsaha/scratch/re_656_data/bert_en_uncased_L-12_H-768_A-12_4"
+	m_url = "https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/4"
 	bert_layer = hub.KerasLayer(m_url, trainable=False)
 
 	vocab_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
@@ -97,36 +91,36 @@ def bert_tokenize(texts, tokenizer):
 
 
 
-def load_table_data(dataset_size='small'):
-    """
-    dataset_size: 'small'|'large'
-    Return: The preprocessed data and the relation labels.
-    """
-    """## Read in Erin's tabular data and preprocess it."""
-
-    # relations_path = '/content/drive/MyDrive/CMPUT 622 project/data/tabular_data/Input_all_29_relation.tsv'
-    if dataset_size == 'small':
-        relations_path = '/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/data/tabular_data/Input_500_29_relation.tsv'
-    else:
-        relations_path = '/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/data/tabular_data/Input_all_29_relation.tsv'
-
-    train_data = pd.read_csv(relations_path, encoding='utf-8', sep = '\t')
-
-
-    train_data.fillna("", inplace = True)
-
-    # Shuffle data so that there is a higher chance of the train and test data being from the same distribution.
-    train_data = shuffle(train_data, random_state = 1)
-    
-    sentences = train_data.iloc[:,:-1].values.tolist()
-
-    sentences = [' '.join(sent).strip() for sent in sentences]
-
-    label = preprocessing.LabelEncoder()
-    y = label.fit_transform(train_data['relation'])
-    label_mappings = integer_mapping = {i: l for i, l in enumerate(label.classes_)}
-    
-    return sentences, y, label_mappings
+# def load_table_data(dataset_size='small'):
+#     """
+#     dataset_size: 'small'|'large'
+#     Return: The preprocessed data and the relation labels.
+#     """
+#     """## Read in Erin's tabular data and preprocess it."""
+#
+#     # relations_path = '/content/drive/MyDrive/CMPUT 622 project/data/tabular_data/Input_all_29_relation.tsv'
+#     if dataset_size == 'small':
+#         relations_path = '/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/data/tabular_data/Input_500_29_relation.tsv'
+#     else:
+#         relations_path = '/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/data/tabular_data/Input_all_29_relation.tsv'
+#
+#     train_data = pd.read_csv(relations_path, encoding='utf-8', sep = '\t')
+#
+#
+#     train_data.fillna("", inplace = True)
+#
+#     # Shuffle data so that there is a higher chance of the train and test data being from the same distribution.
+#     train_data = shuffle(train_data, random_state = 1)
+#
+#     sentences = train_data.iloc[:,:-1].values.tolist()
+#
+#     sentences = [' '.join(sent).strip() for sent in sentences]
+#
+#     label = preprocessing.LabelEncoder()
+#     y = label.fit_transform(train_data['relation'])
+#     label_mappings = integer_mapping = {i: l for i, l in enumerate(label.classes_)}
+#
+#     return sentences, y, label_mappings
 
 # helper functions to read sentence level text
 
