@@ -117,7 +117,7 @@ epochs = epoch_arg
 optimizer_name = "Adam" # DP-SGD, DP-Adam, Adam, SGD
 learning_rate = 0.001
 load_epochs = epochs - 5
-make_private = True
+make_private = False
 EPSILON = epsilon_arg
 DELTA = 1e-5
 MAX_GRAD_NORM = 1.0
@@ -133,7 +133,7 @@ else:
     model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/tabular_data/sgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_seed_{seeds[0]}.pt"
 
 # Define the model and the required optimizer and loss function.
-model = erin_model(sequence_length=sequence_max_length, private=True) # Using default model dimensions.
+model = erin_model(sequence_length=sequence_max_length, private=private) # Using default model dimensions.
 model.to(device)  # Make sure you have this before loading an existing model.
 if optimizer_name == 'RMSProp':
     optimizer = optim.RMSprop(model.parameters(), lr=learning_rate)
@@ -144,9 +144,10 @@ elif optimizer_name == 'SGD':
 
 
 if load_epochs > 0 and make_private==False:
+    pass
     # Only for loading the non-private model. If you try to load the private model checkpoint then it will throw an error. To load a private model, you have to use the PrivacyEnging class to first make the model private and then load the saved model. This is done later after the encoding step.
     print("Loading an existing model from checkpoint.", flush=True)
-    checkpoint = torch.load(model_load_path)
+    checkpoint = torch.load(model_load_path,  map_location=torch.device('cpu'))
     model.load_state_dict(checkpoint['model_state_dict'])
     optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
     model.train()  # This is important
