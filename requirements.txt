@@ -4,3 +4,5 @@ torchvision
 tensorflow
 sentencepiece
 streamlit
+tensorflow-hub
+transformers
