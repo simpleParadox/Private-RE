@@ -32,9 +32,12 @@ from custom_dataset import TableDataset, SemevalDataset
 from semeval_funcs import (bert_tokenize, get_bert_embeds_from_tokens,
                        load_semeval_data, load_table_data, reformat,
                        tf_bert_tokenize, tf_tokenizer)
+import sys                      
 
 # Using gpu if available.
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
+seed_arg = int(sys.argv[2])
+print("Seed arg: ", seed_arg)
 
 
 """## Model definition and training
@@ -110,14 +113,14 @@ else:
 
 # Define model parameters.
 seeds = [0]   # Change the actual seed value here.
-batch_size = 16
-epochs = 5
-optimizer_name = "Adam" # DP-SGD, DP-Adam, Adam, SGD
+batch_size = 10
+epochs = 100
+optimizer_name = "Adam" # DP-SGD, DP-Adam, Adam, SGD, RMSProp
 learning_rate = 0.001
-load_epochs = epochs - 5
+load_epochs = epochs - 100
 make_private = False
 EPSILON = 4
-DELTA = 1e-5
+DELTA = (1/8000)
 MAX_GRAD_NORM = 1.0
 NOISE_MULTIPLIER = 1.5
 
@@ -131,7 +134,7 @@ else:
     model_save_path = f"/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model_checkpoints/semeval/sgd/epoch_{epochs}_{optimizer_name}_{learning_rate}_seed_{seeds[0]}.pt"
 
 # Define the model and the required optimizer and loss function.
-model = erin_model(sequence_length=sequence_max_length, private=True) # Using default model dimensions.
+model = erin_model(sequence_length=sequence_max_length, private=make_private) # Using default model dimensions.
 model.to(device)  # Make sure you have this before loading an existing model.
 if optimizer_name == 'RMSProp':
     optimizer = optim.RMSprop(model.parameters(), lr=learning_rate)
@@ -331,8 +334,8 @@ for seed in seeds:
         
             all_predictions.extend(predicted.cpu().int().numpy())
             all_test_labels.extend(batch_labels_tensor_test.cpu().int().numpy())
-        # print("All predictions: ", all_predictions)
-        # print("All test labels: ", all_test_labels)
+        print("All predictions: ", all_predictions)
+        print("All test labels: ", all_test_labels)
         # Calculate test accuracy and F1 here.
         f1 = f1_score(all_predictions, all_test_labels, average='macro')
         test_accuracy = 100 * correct / total
