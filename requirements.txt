@@ -1,10 +1,10 @@
 torch
 torchaudio
 torchvision
-tensorflow
+tensorflow==2.10
 sentencepiece
 streamlit
 tensorflow-hub
 transformers
-protobuf==3.19.6
+protobuf==3.19.0
 click==8
