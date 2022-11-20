@@ -6,3 +6,5 @@ sentencepiece
 streamlit
 tensorflow-hub
 transformers
+protobuf==3.19.6
+click==8
