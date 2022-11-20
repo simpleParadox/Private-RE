@@ -1,5 +1,4 @@
 *.out
-model_checkpoints/
 model/
 embeds/
 data/tabular_data/Input_all_29_relation.tsv
