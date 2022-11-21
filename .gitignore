@@ -1,5 +1,4 @@
 *.out
-model_checkpoints/
 model/
 embeds/
 data/tabular_data/Input_all_29_relation.tsv
@@ -11,3 +10,4 @@ custom_dataset.py
 out_files/
 mlruns/
 store_embeds_semeval.py
+streamlit_lib/
