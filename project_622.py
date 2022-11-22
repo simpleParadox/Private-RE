@@ -116,8 +116,8 @@ batch_size = 16
 epochs = epoch_arg
 optimizer_name = "Adam" # DP-SGD, DP-Adam, Adam, SGD
 learning_rate = 0.001
-load_epochs = epochs - 5
-make_private = True
+load_epochs = epochs - 1
+make_private = False
 EPSILON = epsilon_arg
 DELTA = 1e-5
 MAX_GRAD_NORM = 1.0
@@ -229,6 +229,7 @@ for seed in seeds:
         for batch_index, data in enumerate(train_dataloader):
             inputs, batch_y_train_classes = data
             # print("Inputs from private dataloader: ", inputs)
+            print("batch y _train_classes: ", batch_y_train_classes)
             inputs_size = inputs['input_ids'].size(0)
             # print("Inputs batch size", inputs_size)
             inputs = reformat(inputs, inputs_size)  # Reformat data for the custom dataset.
@@ -299,7 +300,7 @@ for seed in seeds:
         all_test_tokens.extend(test_tokens)
         # Get bert embeddings for the data.
     print("Test data encoding complete.")
-
+    
     test_dataset = TableDataset(all_test_tokens, y_test_classes)
     test_dataloader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
     
@@ -309,8 +310,8 @@ for seed in seeds:
     with torch.no_grad():
         total = 0.0
         correct = 0.0
-        for batch_index in enumerate(test_dataloader):
-            test_inputs, batch_y_test_classes = data
+        for batch_index, data_from_test in enumerate(test_dataloader):
+            test_inputs, batch_y_test_classes = data_from_test
             test_inputs_size = test_inputs['input_ids'].size(0)
             test_inputs = reformat(test_inputs, test_inputs_size)  # Reformat data for the custom dataset.
             last_hidden_states_test = get_bert_embeds_from_tokens(bert_model, test_inputs)
