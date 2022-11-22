@@ -18,6 +18,26 @@ import sentencepiece
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
+relation_to_id = [
+    "other", 
+    "Entity-Destination(e1,e2)",
+    "Cause-Effect(e2,e1)",        
+    "Member-Collection(e2,e1)",      
+    "Entity-Origin(e1,e2)",        
+    "Message-Topic(e1,e2)",        
+    "Component-Whole(e2,e1)",       
+    "Component-Whole(e1,e2)",       
+    "Instrument-Agency(e2,e1)",     
+    "Product-Producer(e2,e1)",     
+    "Content-Container(e1,e2)",     
+    "Cause-Effect(e1,e2)",          
+    "Product-Producer(e1,e2)",       
+    "Content-Container(e2,e1)",    
+    "Entity-Origin(e2,e1)",          
+    "Message-Topic(e2,e1)",        
+    "Instrument-Agency(e1,e2)",       
+    "Member-Collection(e1,e2)",      
+    "Entity-Destination(e2,e1)"]   
 
 def tf_bert_tokenize(texts, tokenizer, max_len=512):
     all_tokens = []
@@ -88,12 +108,17 @@ def get_bert_embeds_from_tokens(bert_model, encoded_inputs):
       # print("All bert embeds: ", all_bert_embeds)
     return np.concatenate(all_bert_embeds)
 
-def bert_tokenize(texts, tokenizer):
+def bert_tokenize(texts, tokenizer, sequence_max_length):
     all_encoded_inputs = []
     # bert_model = bert_model.to(device)
     for i in range(len(texts)):
         text = texts[i]
-        encoded_input = tokenizer(text, return_tensors='pt', padding="max_length", max_length=50, truncation=True)
+        encoded_input = tokenizer(
+            text, 
+            return_tensors='pt', 
+            padding="max_length", 
+            max_length=sequence_max_length, 
+            truncation=True)
         all_encoded_inputs.append(encoded_input)
         
     return all_encoded_inputs
@@ -172,6 +197,11 @@ def load_semeval_data(inputFilename, outputFilePath):
     data = pd.read_csv(outputFilePath, encoding='utf-8', sep = '\t')
 
     data = shuffle(data, random_state = 1) 
+    # xdata = shuffle(data, random_state = 1) 
+
+    # data = xdata.loc[xdata['relation'] == 'other'][:5]
+    # for r in relation_to_id:
+    #     data = data.append(xdata.loc[xdata['relation'] == r][:5])
 
     features = data.iloc[:,:1].values.tolist()
     sentences = [' '.join(i).strip() for i in features]

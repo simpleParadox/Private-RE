@@ -16,7 +16,7 @@ from opacus import PrivacyEngine
 from opacus.layers import dp_rnn
 # Import scikit-learn packages.
 from sklearn import preprocessing
-from sklearn.metrics import f1_score
+from sklearn.metrics import f1_score, confusion_matrix
 from sklearn.model_selection import KFold, train_test_split
 from sklearn.utils import gen_batches, shuffle
 from torch.utils.data import DataLoader, Dataset, TensorDataset
@@ -32,21 +32,27 @@ from custom_dataset import TableDataset, SemevalDataset
 from semeval_funcs import (bert_tokenize, get_bert_embeds_from_tokens,
                        load_semeval_data, load_table_data, reformat,
                        tf_bert_tokenize, tf_tokenizer)
-import sys                      
+import sys    
+import warnings
+
+warnings.filterwarnings('ignore')
 
 # Using gpu if available.
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
-seed_arg = int(sys.argv[2])
-print("Seed arg: ", seed_arg)
+
+# seed_arg = int(sys.argv[1])
+# print("Seed arg: ", seed_arg)
 
 
 """## Model definition and training
 
 ### Implement the model, make BERT part of the model.
 """
+sequence_max_length = 80
+
 
 class erin_model(nn.Module):
-    def __init__(self, in_size=768, hidden_size: int = 1, num_relations: int = 19, sequence_length:int = 50, private=False):
+    def __init__(self, in_size=768, hidden_size: int = 1, num_relations: int = 19, sequence_length:int = sequence_max_length, private=False):
         super(erin_model,self).__init__()
         
         # Just add one LSTM unit as the model followed by a fully connected layer and then a softmax.
@@ -67,7 +73,7 @@ class erin_model(nn.Module):
         return output
 
 
-sequence_max_length = 50
+
 
 # --- Subject & object markup ---
 SUB_START_CHAR = "<e1>"
@@ -79,7 +85,8 @@ added_special_token = [SUB_START_CHAR, SUB_END_CHAR, OBJ_START_CHAR, OBJ_END_CHA
 
 # Define BertTokenizer and BertModel
 bert_tokenizer = BertTokenizer.from_pretrained(
-    '/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/vocab.txt', model_max_length=sequence_max_length, padding_side='right', local_files_only=True,
+    '/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/vocab.txt',
+    model_max_length=sequence_max_length, padding_side='right', local_files_only=True,
     additional_special_tokens = added_special_token
     )
 bert_model = BertModel.from_pretrained('/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/', local_files_only=True)#, config='/home/rsaha/projects/def-afyshe-ab/rsaha/projects/dp_re/model/bert/config.json')
@@ -109,6 +116,10 @@ else:
     # Load semeval data:
     X_train, y_train_classes, label_mappings = load_semeval_data(train_directory_path, save_traincsvfile_path)
     X_test, y_test_classes, l_map = load_semeval_data(test_directory_path, save_testcsvfile_path)
+    print("Mappings: ", label_mappings)
+    print(l_map)
+    print("train class", y_train_classes)
+    print("Test class", y_test_classes)
 
 
 # Define model parameters.
@@ -188,7 +199,7 @@ for seed in seeds:
         sentence_batch = X_train_subset[batch:batch+batch_size]
         
         # Tokenize the data.
-        train_tokens = bert_tokenize(sentence_batch, bert_tokenizer)
+        train_tokens = bert_tokenize(sentence_batch, bert_tokenizer, sequence_max_length)
         # train_tokens = tf_bert_tokenize(sentence_batch, tf_bert_tokenizer, max_len=sequence_max_length)
         # print("Train tokens: ", train_tokens)
         # print("Type train tokens: ", type(train_tokens))
@@ -297,7 +308,7 @@ for seed in seeds:
         sentence_batch = X_test[batch:batch+batch_size]
         
         # Tokenize the data.
-        test_tokens = bert_tokenize(sentence_batch, bert_tokenizer)
+        test_tokens = bert_tokenize(sentence_batch, bert_tokenizer, sequence_max_length)
         #test_tokens = tf_bert_tokenize(sentence_batch, tf_bert_tokenizer, max_len=sequence_max_length)
         all_test_tokens.extend(test_tokens)
         # Get bert embeddings for the data.
@@ -341,6 +352,9 @@ for seed in seeds:
         test_accuracy = 100 * correct / total
         print(f'Test accuracy for seed {seed}: {100 * correct / total} %')
         print(f"Test f1 is: {f1}")
+
+        cm = confusion_matrix(all_test_labels, all_predictions, labels=[i for i in label_mappings.keys()])
+        print(cm)
 
     log_metric("Test Accuracy", test_accuracy)
     log_metric("Test F1", f1)
