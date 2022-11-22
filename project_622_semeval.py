@@ -125,10 +125,10 @@ else:
 # Define model parameters.
 seeds = [0]   # Change the actual seed value here.
 batch_size = 10
-epochs = 1
+epochs = 100
 optimizer_name = "Adam" # DP-SGD, DP-Adam, Adam, SGD, RMSProp
 learning_rate = 0.001
-load_epochs = epochs - 1
+load_epochs = epochs - 100
 make_private = False
 EPSILON = 4
 DELTA = (1/8000)
