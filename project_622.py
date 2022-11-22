@@ -228,8 +228,6 @@ for seed in seeds:
         running_loss = 0.0
         for batch_index, data in enumerate(train_dataloader):
             inputs, batch_y_train_classes = data
-            # print("Inputs from private dataloader: ", inputs)
-            print("batch y _train_classes: ", batch_y_train_classes)
             inputs_size = inputs['input_ids'].size(0)
             # print("Inputs batch size", inputs_size)
             inputs = reformat(inputs, inputs_size)  # Reformat data for the custom dataset.
