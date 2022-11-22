@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/a8ca6db0ea874527be91b0d1ed425e3a/artifacts
+deleted_time: 1669088200054
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: a8ca6db0ea874527be91b0d1ed425e3a
+run_name: nebulous-hound-551
+run_uuid: a8ca6db0ea874527be91b0d1ed425e3a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669080246773
+status: 1
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/3f2e15cb429843148570edab32678fcb/artifacts
+deleted_time: 1669088201633
+end_time: 1668715522517
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 3f2e15cb429843148570edab32678fcb
+run_name: indecisive-skunk-404
+run_uuid: 3f2e15cb429843148570edab32678fcb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668715226306
+status: 3
+tags: []
+user_id: rsaha

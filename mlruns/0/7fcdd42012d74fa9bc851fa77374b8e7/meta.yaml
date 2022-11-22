@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/7fcdd42012d74fa9bc851fa77374b8e7/artifacts
+deleted_time: 1669088199660
+end_time: 1669086909023
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 7fcdd42012d74fa9bc851fa77374b8e7
+run_name: unique-foal-121
+run_uuid: 7fcdd42012d74fa9bc851fa77374b8e7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669086842031
+status: 3
+tags: []
+user_id: rsaha

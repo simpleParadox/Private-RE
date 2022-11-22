@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/fc666fd2735247dbaa9aa7e89db0d62b/artifacts
+deleted_time: 1669088201057
+end_time: 1668910633371
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: fc666fd2735247dbaa9aa7e89db0d62b
+run_name: burly-grub-729
+run_uuid: fc666fd2735247dbaa9aa7e89db0d62b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668889577975
+status: 3
+tags: []
+user_id: rsaha

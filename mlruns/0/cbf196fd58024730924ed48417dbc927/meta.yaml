@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/cbf196fd58024730924ed48417dbc927/artifacts
+deleted_time: 1668752187085
+end_time: 1668614951180
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: cbf196fd58024730924ed48417dbc927
+run_name: skillful-mink-393
+run_uuid: cbf196fd58024730924ed48417dbc927
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668594111112
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/cd12235c68b44254b515cb09f6afc2df/artifacts
+deleted_time: 1668483934012
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: cd12235c68b44254b515cb09f6afc2df
+run_name: monumental-toad-921
+run_uuid: cd12235c68b44254b515cb09f6afc2df
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668382101011
+status: 1
+tags: []
+user_id: rsaha

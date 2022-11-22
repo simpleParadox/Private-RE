@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/0/08e5a75e3d7e4236b307adf1c1513928/artifacts
+end_time: 1669103926480
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 08e5a75e3d7e4236b307adf1c1513928
+run_name: funny-shrike-915
+run_uuid: 08e5a75e3d7e4236b307adf1c1513928
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669089280749
+status: 3
+tags: []
+user_id: rsaha

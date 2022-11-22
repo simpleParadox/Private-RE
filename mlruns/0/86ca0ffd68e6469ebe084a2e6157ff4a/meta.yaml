@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/86ca0ffd68e6469ebe084a2e6157ff4a/artifacts
+deleted_time: 1669088201043
+end_time: 1668910154273
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 86ca0ffd68e6469ebe084a2e6157ff4a
+run_name: nosy-moth-241
+run_uuid: 86ca0ffd68e6469ebe084a2e6157ff4a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668889777776
+status: 3
+tags: []
+user_id: rsaha

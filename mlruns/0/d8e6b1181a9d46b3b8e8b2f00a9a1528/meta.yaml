@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/d8e6b1181a9d46b3b8e8b2f00a9a1528/artifacts
+deleted_time: 1669088200040
+end_time: 1669080577658
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: d8e6b1181a9d46b3b8e8b2f00a9a1528
+run_name: luminous-elk-767
+run_uuid: d8e6b1181a9d46b3b8e8b2f00a9a1528
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669080575581
+status: 3
+tags: []
+user_id: rsaha

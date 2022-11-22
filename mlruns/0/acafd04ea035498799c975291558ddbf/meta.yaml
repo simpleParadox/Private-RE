@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/acafd04ea035498799c975291558ddbf/artifacts
+deleted_time: 1669088200856
+end_time: 1668911839899
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: acafd04ea035498799c975291558ddbf
+run_name: redolent-moth-543
+run_uuid: acafd04ea035498799c975291558ddbf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668890978902
+status: 3
+tags: []
+user_id: rsaha

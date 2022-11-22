@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/243926e45348448584d53d361ba04c8a/artifacts
+deleted_time: 1668808154365
+end_time: 1668806610596
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 243926e45348448584d53d361ba04c8a
+run_name: tasteful-chimp-669
+run_uuid: 243926e45348448584d53d361ba04c8a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668806567049
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/7273b2ffdc954435abb99eb1e819b24f/artifacts
+deleted_time: 1668578912889
+end_time: 1668555750293
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 7273b2ffdc954435abb99eb1e819b24f
+run_name: chill-kit-678
+run_uuid: 7273b2ffdc954435abb99eb1e819b24f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668555745704
+status: 3
+tags: []
+user_id: rsaha

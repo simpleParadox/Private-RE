@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/e5780ef2de3b4ed6a8ea964ca54eec49/artifacts
+deleted_time: 1668497992901
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: e5780ef2de3b4ed6a8ea964ca54eec49
+run_name: rare-frog-973
+run_uuid: e5780ef2de3b4ed6a8ea964ca54eec49
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668475803635
+status: 1
+tags: []
+user_id: rsaha

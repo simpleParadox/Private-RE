@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/0edf32b1dbe54b29876442eb9c514d24/artifacts
+deleted_time: 1669088201214
+end_time: 1668826892738
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 0edf32b1dbe54b29876442eb9c514d24
+run_name: vaunted-fox-435
+run_uuid: 0edf32b1dbe54b29876442eb9c514d24
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668824618913
+status: 3
+tags: []
+user_id: rsaha

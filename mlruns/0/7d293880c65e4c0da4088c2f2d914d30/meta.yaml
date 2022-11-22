@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/7d293880c65e4c0da4088c2f2d914d30/artifacts
+deleted_time: 1669088200863
+end_time: 1668912333379
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 7d293880c65e4c0da4088c2f2d914d30
+run_name: capricious-cod-273
+run_uuid: 7d293880c65e4c0da4088c2f2d914d30
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668890769676
+status: 3
+tags: []
+user_id: rsaha

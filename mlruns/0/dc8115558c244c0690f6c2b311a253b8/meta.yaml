@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/dc8115558c244c0690f6c2b311a253b8/artifacts
+deleted_time: 1668817015804
+end_time: 1668730561970
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: dc8115558c244c0690f6c2b311a253b8
+run_name: amazing-roo-613
+run_uuid: dc8115558c244c0690f6c2b311a253b8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668714239678
+status: 3
+tags: []
+user_id: rsaha

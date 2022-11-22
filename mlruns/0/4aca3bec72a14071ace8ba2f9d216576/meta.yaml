@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/4aca3bec72a14071ace8ba2f9d216576/artifacts
+deleted_time: 1669088201443
+end_time: 1668830313605
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 4aca3bec72a14071ace8ba2f9d216576
+run_name: enchanting-carp-197
+run_uuid: 4aca3bec72a14071ace8ba2f9d216576
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668808827602
+status: 3
+tags: []
+user_id: rsaha

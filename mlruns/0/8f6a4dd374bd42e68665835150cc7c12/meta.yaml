@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/8f6a4dd374bd42e68665835150cc7c12/artifacts
+deleted_time: 1668483934101
+end_time: 1668380544926
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 8f6a4dd374bd42e68665835150cc7c12
+run_name: sassy-skink-332
+run_uuid: 8f6a4dd374bd42e68665835150cc7c12
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668380188196
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/b92487ee6a354a6fa09e265f5e413ef9/artifacts
+deleted_time: 1669088200867
+end_time: 1668911812902
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: b92487ee6a354a6fa09e265f5e413ef9
+run_name: burly-dove-570
+run_uuid: b92487ee6a354a6fa09e265f5e413ef9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668890766846
+status: 3
+tags: []
+user_id: rsaha

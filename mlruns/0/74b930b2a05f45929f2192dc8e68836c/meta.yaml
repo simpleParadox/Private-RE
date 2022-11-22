@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/74b930b2a05f45929f2192dc8e68836c/artifacts
+deleted_time: 1669088201021
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 74b930b2a05f45929f2192dc8e68836c
+run_name: treasured-bird-475
+run_uuid: 74b930b2a05f45929f2192dc8e68836c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668889777777
+status: 1
+tags: []
+user_id: rsaha

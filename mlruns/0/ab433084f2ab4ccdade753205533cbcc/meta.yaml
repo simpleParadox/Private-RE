@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/ab433084f2ab4ccdade753205533cbcc/artifacts
+deleted_time: 1668808154370
+end_time: 1668806793345
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: ab433084f2ab4ccdade753205533cbcc
+run_name: debonair-ape-368
+run_uuid: ab433084f2ab4ccdade753205533cbcc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668806749262
+status: 3
+tags: []
+user_id: rsaha

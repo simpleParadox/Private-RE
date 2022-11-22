@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/f29590b9cc1145f9baee64b60b6521b8/artifacts
+deleted_time: 1669088201438
+end_time: 1668829964569
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: f29590b9cc1145f9baee64b60b6521b8
+run_name: unleashed-cow-440
+run_uuid: f29590b9cc1145f9baee64b60b6521b8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668808830945
+status: 3
+tags: []
+user_id: rsaha

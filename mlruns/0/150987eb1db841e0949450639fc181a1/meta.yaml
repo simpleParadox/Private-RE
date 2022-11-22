@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/150987eb1db841e0949450639fc181a1/artifacts
+deleted_time: 1669088199856
+end_time: 1669086319409
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 150987eb1db841e0949450639fc181a1
+run_name: sneaky-skunk-644
+run_uuid: 150987eb1db841e0949450639fc181a1
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669086210232
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/25909818c3654fc1b05040800c2db927/artifacts
+deleted_time: 1668752187078
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 25909818c3654fc1b05040800c2db927
+run_name: suave-wren-610
+run_uuid: 25909818c3654fc1b05040800c2db927
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668638766099
+status: 1
+tags: []
+user_id: rsaha

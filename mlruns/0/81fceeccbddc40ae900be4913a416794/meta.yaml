@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/81fceeccbddc40ae900be4913a416794/artifacts
+deleted_time: 1669088200249
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 81fceeccbddc40ae900be4913a416794
+run_name: rumbling-snake-960
+run_uuid: 81fceeccbddc40ae900be4913a416794
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669076920088
+status: 1
+tags: []
+user_id: rsaha

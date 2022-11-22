@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/d137ca89f8564068b45f52866d6454fc/artifacts
+deleted_time: 1669088200462
+end_time: 1668955299173
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: d137ca89f8564068b45f52866d6454fc
+run_name: fun-fish-257
+run_uuid: d137ca89f8564068b45f52866d6454fc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668934595686
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/2988317b22164b8bbb220669d2b7af4c/artifacts
+deleted_time: 1669088199863
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 2988317b22164b8bbb220669d2b7af4c
+run_name: welcoming-pig-808
+run_uuid: 2988317b22164b8bbb220669d2b7af4c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669081361014
+status: 1
+tags: []
+user_id: rsaha

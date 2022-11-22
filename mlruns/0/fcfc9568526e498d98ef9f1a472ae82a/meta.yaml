@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/fcfc9568526e498d98ef9f1a472ae82a/artifacts
+deleted_time: 1668484077197
+end_time: 1668471087328
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: fcfc9568526e498d98ef9f1a472ae82a
+run_name: traveling-slug-631
+run_uuid: fcfc9568526e498d98ef9f1a472ae82a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668471082790
+status: 3
+tags: []
+user_id: rsaha

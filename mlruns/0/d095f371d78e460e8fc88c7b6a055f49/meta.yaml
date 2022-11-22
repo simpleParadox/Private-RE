@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/d095f371d78e460e8fc88c7b6a055f49/artifacts
+deleted_time: 1669088199867
+end_time: 1669081419310
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: d095f371d78e460e8fc88c7b6a055f49
+run_name: thundering-steed-314
+run_uuid: d095f371d78e460e8fc88c7b6a055f49
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669081360216
+status: 3
+tags: []
+user_id: rsaha

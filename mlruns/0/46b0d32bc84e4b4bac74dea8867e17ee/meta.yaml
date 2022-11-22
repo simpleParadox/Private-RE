@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/0/46b0d32bc84e4b4bac74dea8867e17ee/artifacts
+end_time: 1669103537216
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 46b0d32bc84e4b4bac74dea8867e17ee
+run_name: placid-zebra-322
+run_uuid: 46b0d32bc84e4b4bac74dea8867e17ee
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669089281019
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/9a9c13e756bd43e597eed6a939ab9a4b/artifacts
+deleted_time: 1669088201431
+end_time: 1668831308103
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 9a9c13e756bd43e597eed6a939ab9a4b
+run_name: delightful-crab-903
+run_uuid: 9a9c13e756bd43e597eed6a939ab9a4b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668809064424
+status: 3
+tags: []
+user_id: rsaha

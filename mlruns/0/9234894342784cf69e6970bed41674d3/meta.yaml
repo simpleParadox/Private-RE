@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/9234894342784cf69e6970bed41674d3/artifacts
+deleted_time: 1669088200466
+end_time: 1668955327956
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 9234894342784cf69e6970bed41674d3
+run_name: colorful-gnu-542
+run_uuid: 9234894342784cf69e6970bed41674d3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668934595626
+status: 3
+tags: []
+user_id: rsaha

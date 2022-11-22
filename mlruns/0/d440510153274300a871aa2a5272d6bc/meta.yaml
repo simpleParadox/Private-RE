@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/d440510153274300a871aa2a5272d6bc/artifacts
+deleted_time: 1669088199664
+end_time: 1669086611558
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: d440510153274300a871aa2a5272d6bc
+run_name: serious-moose-794
+run_uuid: d440510153274300a871aa2a5272d6bc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669086558618
+status: 3
+tags: []
+user_id: rsaha

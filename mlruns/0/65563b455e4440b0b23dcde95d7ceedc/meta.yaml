@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/65563b455e4440b0b23dcde95d7ceedc/artifacts
+deleted_time: 1669088201447
+end_time: 1668830548615
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 65563b455e4440b0b23dcde95d7ceedc
+run_name: righteous-shrew-478
+run_uuid: 65563b455e4440b0b23dcde95d7ceedc
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668808827560
+status: 3
+tags: []
+user_id: rsaha

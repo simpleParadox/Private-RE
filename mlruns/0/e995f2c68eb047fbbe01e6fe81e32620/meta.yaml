@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/e995f2c68eb047fbbe01e6fe81e32620/artifacts
+deleted_time: 1668752187074
+end_time: 1668672039448
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: e995f2c68eb047fbbe01e6fe81e32620
+run_name: sedate-crab-348
+run_uuid: e995f2c68eb047fbbe01e6fe81e32620
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668672037498
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/636982659c1743ae81001f542095e0fa/artifacts
+deleted_time: 1669088200078
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 636982659c1743ae81001f542095e0fa
+run_name: spiffy-stoat-482
+run_uuid: 636982659c1743ae81001f542095e0fa
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669076920230
+status: 1
+tags: []
+user_id: rsaha

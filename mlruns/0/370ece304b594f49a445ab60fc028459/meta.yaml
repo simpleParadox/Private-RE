@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/0/370ece304b594f49a445ab60fc028459/artifacts
+end_time: 1669089100815
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 370ece304b594f49a445ab60fc028459
+run_name: gentle-fish-689
+run_uuid: 370ece304b594f49a445ab60fc028459
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669089100185
+status: 3
+tags: []
+user_id: rsaha

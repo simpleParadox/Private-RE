@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/09a1794481a2476a9dd9eb549f1625ad/artifacts
+deleted_time: 1669088201600
+end_time: 1668718265947
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 09a1794481a2476a9dd9eb549f1625ad
+run_name: youthful-toad-600
+run_uuid: 09a1794481a2476a9dd9eb549f1625ad
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668717974144
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/dc337cdf2c0a44e3b0a842724420434d/artifacts
+deleted_time: 1668752187082
+end_time: 1668641401600
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: dc337cdf2c0a44e3b0a842724420434d
+run_name: caring-rook-72
+run_uuid: dc337cdf2c0a44e3b0a842724420434d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668620468127
+status: 3
+tags: []
+user_id: rsaha

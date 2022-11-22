@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/c522dfdc277d4d039101b4b3bd02f615/artifacts
+deleted_time: 1669088200066
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: c522dfdc277d4d039101b4b3bd02f615
+run_name: luxuriant-loon-886
+run_uuid: c522dfdc277d4d039101b4b3bd02f615
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669077658479
+status: 1
+tags: []
+user_id: rsaha

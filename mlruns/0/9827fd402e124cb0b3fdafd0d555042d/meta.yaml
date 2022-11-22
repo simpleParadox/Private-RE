@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/9827fd402e124cb0b3fdafd0d555042d/artifacts
+deleted_time: 1668808154361
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 9827fd402e124cb0b3fdafd0d555042d
+run_name: classy-conch-404
+run_uuid: 9827fd402e124cb0b3fdafd0d555042d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668806959381
+status: 1
+tags: []
+user_id: rsaha

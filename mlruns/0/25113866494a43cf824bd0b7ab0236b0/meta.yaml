@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/25113866494a43cf824bd0b7ab0236b0/artifacts
+deleted_time: 1668752187067
+end_time: 1668713426682
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 25113866494a43cf824bd0b7ab0236b0
+run_name: persistent-fawn-300
+run_uuid: 25113866494a43cf824bd0b7ab0236b0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668713159970
+status: 3
+tags: []
+user_id: rsaha

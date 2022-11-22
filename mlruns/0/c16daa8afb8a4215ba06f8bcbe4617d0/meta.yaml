@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/c16daa8afb8a4215ba06f8bcbe4617d0/artifacts
+deleted_time: 1669088200459
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: c16daa8afb8a4215ba06f8bcbe4617d0
+run_name: popular-dog-392
+run_uuid: c16daa8afb8a4215ba06f8bcbe4617d0
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668934595805
+status: 1
+tags: []
+user_id: rsaha

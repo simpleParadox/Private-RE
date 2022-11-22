@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/fca9cf3f345c41d0942f966356cbb2a6/artifacts
+deleted_time: 1669088200668
+end_time: 1668913168453
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: fca9cf3f345c41d0942f966356cbb2a6
+run_name: persistent-zebra-381
+run_uuid: fca9cf3f345c41d0942f966356cbb2a6
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668891976083
+status: 3
+tags: []
+user_id: rsaha

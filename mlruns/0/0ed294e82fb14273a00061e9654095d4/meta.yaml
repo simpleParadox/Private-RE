@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/0/0ed294e82fb14273a00061e9654095d4/artifacts
+end_time: 1669089101052
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 0ed294e82fb14273a00061e9654095d4
+run_name: gentle-bee-855
+run_uuid: 0ed294e82fb14273a00061e9654095d4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669089100200
+status: 3
+tags: []
+user_id: rsaha

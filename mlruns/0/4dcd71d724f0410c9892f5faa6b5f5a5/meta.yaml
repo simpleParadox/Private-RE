@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/4dcd71d724f0410c9892f5faa6b5f5a5/artifacts
+deleted_time: 1669088200672
+end_time: 1668912728869
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 4dcd71d724f0410c9892f5faa6b5f5a5
+run_name: adorable-donkey-537
+run_uuid: 4dcd71d724f0410c9892f5faa6b5f5a5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668891794070
+status: 3
+tags: []
+user_id: rsaha

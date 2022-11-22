@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/2a3df6b4220b445cb38d4ff16196a0ba/artifacts
+deleted_time: 1668808154379
+end_time: 1668805712829
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 2a3df6b4220b445cb38d4ff16196a0ba
+run_name: crawling-conch-15
+run_uuid: 2a3df6b4220b445cb38d4ff16196a0ba
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668805544867
+status: 3
+tags: []
+user_id: rsaha

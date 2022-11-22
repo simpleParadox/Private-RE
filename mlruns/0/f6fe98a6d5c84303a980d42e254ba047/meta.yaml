@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/0/f6fe98a6d5c84303a980d42e254ba047/artifacts
+end_time: 1669103587503
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: f6fe98a6d5c84303a980d42e254ba047
+run_name: stylish-gnu-126
+run_uuid: f6fe98a6d5c84303a980d42e254ba047
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669089280789
+status: 3
+tags: []
+user_id: rsaha

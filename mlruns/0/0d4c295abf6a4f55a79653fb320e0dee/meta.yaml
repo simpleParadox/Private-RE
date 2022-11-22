@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/0d4c295abf6a4f55a79653fb320e0dee/artifacts
+deleted_time: 1669088199648
+end_time: 1669087529249
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 0d4c295abf6a4f55a79653fb320e0dee
+run_name: rogue-fawn-508
+run_uuid: 0d4c295abf6a4f55a79653fb320e0dee
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669087471410
+status: 3
+tags: []
+user_id: rsaha

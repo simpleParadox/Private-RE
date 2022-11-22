@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/66e56e8be2474ccaabaa57da5e8a2c7c/artifacts
+deleted_time: 1669088201406
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 66e56e8be2474ccaabaa57da5e8a2c7c
+run_name: nebulous-zebra-328
+run_uuid: 66e56e8be2474ccaabaa57da5e8a2c7c
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668816425801
+status: 1
+tags: []
+user_id: rsaha

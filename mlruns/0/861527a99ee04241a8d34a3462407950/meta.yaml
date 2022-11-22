@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/861527a99ee04241a8d34a3462407950/artifacts
+deleted_time: 1669088201237
+end_time: 1668831336018
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 861527a99ee04241a8d34a3462407950
+run_name: tasteful-owl-163
+run_uuid: 861527a99ee04241a8d34a3462407950
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668817414750
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/8e5c1a6946ef4b3693020a4a932761c7/artifacts
+deleted_time: 1669088200059
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 8e5c1a6946ef4b3693020a4a932761c7
+run_name: debonair-wren-750
+run_uuid: 8e5c1a6946ef4b3693020a4a932761c7
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669078772540
+status: 1
+tags: []
+user_id: rsaha

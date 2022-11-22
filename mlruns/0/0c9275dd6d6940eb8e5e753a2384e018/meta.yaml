@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/0/0c9275dd6d6940eb8e5e753a2384e018/artifacts
+end_time: 1669089102865
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 0c9275dd6d6940eb8e5e753a2384e018
+run_name: powerful-bass-793
+run_uuid: 0c9275dd6d6940eb8e5e753a2384e018
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669089100212
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/201b569f2f8e47b48cd44c730129863f/artifacts
+deleted_time: 1669088200655
+end_time: 1668902699799
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 201b569f2f8e47b48cd44c730129863f
+run_name: gregarious-mink-563
+run_uuid: 201b569f2f8e47b48cd44c730129863f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668897742156
+status: 3
+tags: []
+user_id: rsaha

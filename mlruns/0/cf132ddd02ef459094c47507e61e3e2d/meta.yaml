@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/cf132ddd02ef459094c47507e61e3e2d/artifacts
+deleted_time: 1669088200469
+end_time: 1668955634066
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: cf132ddd02ef459094c47507e61e3e2d
+run_name: calm-grub-918
+run_uuid: cf132ddd02ef459094c47507e61e3e2d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668934595626
+status: 3
+tags: []
+user_id: rsaha

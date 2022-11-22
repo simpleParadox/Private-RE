@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/03da399430c54128bbd49cbe3d54a4ad/artifacts
+deleted_time: 1668817015800
+end_time: 1668730366535
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 03da399430c54128bbd49cbe3d54a4ad
+run_name: fun-crane-593
+run_uuid: 03da399430c54128bbd49cbe3d54a4ad
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668714245783
+status: 3
+tags: []
+user_id: rsaha

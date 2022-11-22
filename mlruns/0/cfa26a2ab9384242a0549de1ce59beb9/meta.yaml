@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/cfa26a2ab9384242a0549de1ce59beb9/artifacts
+deleted_time: 1668752187272
+end_time: 1668502951721
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: cfa26a2ab9384242a0549de1ce59beb9
+run_name: defiant-bird-326
+run_uuid: cfa26a2ab9384242a0549de1ce59beb9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668485546625
+status: 3
+tags: []
+user_id: rsaha

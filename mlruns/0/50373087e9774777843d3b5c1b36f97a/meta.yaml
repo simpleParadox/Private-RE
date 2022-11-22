@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/50373087e9774777843d3b5c1b36f97a/artifacts
+deleted_time: 1669088199653
+end_time: 1669087373574
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 50373087e9774777843d3b5c1b36f97a
+run_name: brawny-bee-529
+run_uuid: 50373087e9774777843d3b5c1b36f97a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669087316764
+status: 3
+tags: []
+user_id: rsaha

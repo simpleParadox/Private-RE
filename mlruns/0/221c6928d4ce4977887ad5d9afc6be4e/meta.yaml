@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/221c6928d4ce4977887ad5d9afc6be4e/artifacts
+deleted_time: 1668808154376
+end_time: 1668806455940
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 221c6928d4ce4977887ad5d9afc6be4e
+run_name: amazing-crane-72
+run_uuid: 221c6928d4ce4977887ad5d9afc6be4e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668806411069
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/7ee1d3fdfcec4dc9870cd859f2d76ed2/artifacts
+deleted_time: 1668817015787
+end_time: 1668730726140
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 7ee1d3fdfcec4dc9870cd859f2d76ed2
+run_name: burly-sheep-690
+run_uuid: 7ee1d3fdfcec4dc9870cd859f2d76ed2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668714496910
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/0/4d098fd0d97b44ef9ad3e8568606575e/artifacts
+end_time: 1669089100871
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 4d098fd0d97b44ef9ad3e8568606575e
+run_name: big-chimp-288
+run_uuid: 4d098fd0d97b44ef9ad3e8568606575e
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669089100185
+status: 3
+tags: []
+user_id: rsaha

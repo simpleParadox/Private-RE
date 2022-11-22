@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/eacd77bfa7e74036bec0034e548ddcc5/artifacts
+deleted_time: 1668752187268
+end_time: 1668519308219
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: eacd77bfa7e74036bec0034e548ddcc5
+run_name: big-flea-652
+run_uuid: eacd77bfa7e74036bec0034e548ddcc5
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668498303407
+status: 3
+tags: []
+user_id: rsaha

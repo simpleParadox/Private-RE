@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/0/7867d33ed32f4fbabab7695a637a7324/artifacts
+end_time: 1669103235669
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 7867d33ed32f4fbabab7695a637a7324
+run_name: handsome-asp-340
+run_uuid: 7867d33ed32f4fbabab7695a637a7324
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669089280985
+status: 3
+tags: []
+user_id: rsaha

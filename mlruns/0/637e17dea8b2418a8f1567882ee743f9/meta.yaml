@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/637e17dea8b2418a8f1567882ee743f9/artifacts
+deleted_time: 1668817015794
+end_time: 1668730652869
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 637e17dea8b2418a8f1567882ee743f9
+run_name: glamorous-zebra-456
+run_uuid: 637e17dea8b2418a8f1567882ee743f9
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668714493231
+status: 3
+tags: []
+user_id: rsaha

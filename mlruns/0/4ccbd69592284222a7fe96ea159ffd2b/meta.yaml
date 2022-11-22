@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/4ccbd69592284222a7fe96ea159ffd2b/artifacts
+deleted_time: 1668817015797
+end_time: 1668730939514
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 4ccbd69592284222a7fe96ea159ffd2b
+run_name: whimsical-hawk-736
+run_uuid: 4ccbd69592284222a7fe96ea159ffd2b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668714494501
+status: 3
+tags: []
+user_id: rsaha

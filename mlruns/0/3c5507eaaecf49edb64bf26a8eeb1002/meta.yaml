@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/3c5507eaaecf49edb64bf26a8eeb1002/artifacts
+deleted_time: 1668578912897
+end_time: 1668555615435
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 3c5507eaaecf49edb64bf26a8eeb1002
+run_name: languid-ox-831
+run_uuid: 3c5507eaaecf49edb64bf26a8eeb1002
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668555610077
+status: 3
+tags: []
+user_id: rsaha

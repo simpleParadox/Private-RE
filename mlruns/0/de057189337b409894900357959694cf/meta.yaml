@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/de057189337b409894900357959694cf/artifacts
+deleted_time: 1669088201241
+end_time: 1668831616370
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: de057189337b409894900357959694cf
+run_name: gifted-asp-79
+run_uuid: de057189337b409894900357959694cf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668817413552
+status: 3
+tags: []
+user_id: rsaha

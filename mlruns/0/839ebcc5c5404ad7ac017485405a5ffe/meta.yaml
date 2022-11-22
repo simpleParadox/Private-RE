@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/839ebcc5c5404ad7ac017485405a5ffe/artifacts
+deleted_time: 1669088199668
+end_time: 1669086483477
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 839ebcc5c5404ad7ac017485405a5ffe
+run_name: resilient-finch-467
+run_uuid: 839ebcc5c5404ad7ac017485405a5ffe
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669086391613
+status: 3
+tags: []
+user_id: rsaha

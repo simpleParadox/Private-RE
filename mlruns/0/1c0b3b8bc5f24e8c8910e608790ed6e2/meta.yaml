@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/1c0b3b8bc5f24e8c8910e608790ed6e2/artifacts
+deleted_time: 1669088200281
+end_time: 1668993524227
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 1c0b3b8bc5f24e8c8910e608790ed6e2
+run_name: ambitious-duck-642
+run_uuid: 1c0b3b8bc5f24e8c8910e608790ed6e2
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668971860324
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/e0933c2184da4992b1ef858b6dbd02bf/artifacts
+deleted_time: 1669088200665
+end_time: 1668913097339
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: e0933c2184da4992b1ef858b6dbd02bf
+run_name: bedecked-gnat-959
+run_uuid: e0933c2184da4992b1ef858b6dbd02bf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668891976110
+status: 3
+tags: []
+user_id: rsaha

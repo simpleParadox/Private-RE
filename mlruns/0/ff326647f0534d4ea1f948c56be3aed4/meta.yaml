@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/ff326647f0534d4ea1f948c56be3aed4/artifacts
+deleted_time: 1669088200661
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: ff326647f0534d4ea1f948c56be3aed4
+run_name: industrious-hog-679
+run_uuid: ff326647f0534d4ea1f948c56be3aed4
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668891988498
+status: 1
+tags: []
+user_id: rsaha

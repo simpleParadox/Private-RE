@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/e48f5bedf8b540eab6c79ae44a3d0095/artifacts
+deleted_time: 1669088199844
+end_time: 1669086382863
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: e48f5bedf8b540eab6c79ae44a3d0095
+run_name: thundering-finch-433
+run_uuid: e48f5bedf8b540eab6c79ae44a3d0095
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669086328620
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/c884e7f5661049d98440b46329857abf/artifacts
+deleted_time: 1669088201435
+end_time: 1668830110070
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: c884e7f5661049d98440b46329857abf
+run_name: industrious-lamb-867
+run_uuid: c884e7f5661049d98440b46329857abf
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668809064382
+status: 3
+tags: []
+user_id: rsaha

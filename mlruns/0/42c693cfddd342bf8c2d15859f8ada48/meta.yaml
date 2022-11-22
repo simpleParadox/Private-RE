@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/42c693cfddd342bf8c2d15859f8ada48/artifacts
+deleted_time: 1668483934105
+end_time: 1668405239800
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 42c693cfddd342bf8c2d15859f8ada48
+run_name: chill-mare-70
+run_uuid: 42c693cfddd342bf8c2d15859f8ada48
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668388562736
+status: 3
+tags: []
+user_id: rsaha

@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/0e3019e392a84f088c18390e3849ce4b/artifacts
+deleted_time: 1668483933969
+end_time: 1668420241561
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 0e3019e392a84f088c18390e3849ce4b
+run_name: thundering-hare-81
+run_uuid: 0e3019e392a84f088c18390e3849ce4b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668398479412
+status: 3
+tags: []
+user_id: rsaha

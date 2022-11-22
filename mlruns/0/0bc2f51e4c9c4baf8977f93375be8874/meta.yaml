@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/0bc2f51e4c9c4baf8977f93375be8874/artifacts
+deleted_time: 1668752187277
+end_time: 1668482934763
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 0bc2f51e4c9c4baf8977f93375be8874
+run_name: smiling-zebra-205
+run_uuid: 0bc2f51e4c9c4baf8977f93375be8874
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668465361740
+status: 3
+tags: []
+user_id: rsaha

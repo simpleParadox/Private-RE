@@ -1,0 +1,15 @@
+artifact_uri: ./mlruns/0/2620cab97e614519bb2d1995d17e8572/artifacts
+end_time: 1669103601453
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 2620cab97e614519bb2d1995d17e8572
+run_name: likeable-mule-871
+run_uuid: 2620cab97e614519bb2d1995d17e8572
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1669089281247
+status: 3
+tags: []
+user_id: rsaha

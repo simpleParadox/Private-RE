@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/4d2cbcf5e7bf417f945c73c76a4afe7a/artifacts
+deleted_time: 1669088201061
+end_time: 1668833459103
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 4d2cbcf5e7bf417f945c73c76a4afe7a
+run_name: nosy-moose-754
+run_uuid: 4d2cbcf5e7bf417f945c73c76a4afe7a
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668828792100
+status: 3
+tags: []
+user_id: rsaha

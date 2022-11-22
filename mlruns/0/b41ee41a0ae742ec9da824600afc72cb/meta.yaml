@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/b41ee41a0ae742ec9da824600afc72cb/artifacts
+deleted_time: 1669088201253
+end_time: 1668831413314
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: b41ee41a0ae742ec9da824600afc72cb
+run_name: overjoyed-newt-803
+run_uuid: b41ee41a0ae742ec9da824600afc72cb
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668817154989
+status: 3
+tags: []
+user_id: rsaha

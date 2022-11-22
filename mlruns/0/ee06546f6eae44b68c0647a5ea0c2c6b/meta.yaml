@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/ee06546f6eae44b68c0647a5ea0c2c6b/artifacts
+deleted_time: 1669088200276
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: ee06546f6eae44b68c0647a5ea0c2c6b
+run_name: puzzled-pig-101
+run_uuid: ee06546f6eae44b68c0647a5ea0c2c6b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668973189270
+status: 1
+tags: []
+user_id: rsaha

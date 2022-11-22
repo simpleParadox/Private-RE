@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/7aa7a2e0e4e24396b268063203b1bde6/artifacts
+deleted_time: 1669088200259
+end_time: 1668994222772
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 7aa7a2e0e4e24396b268063203b1bde6
+run_name: sedate-vole-282
+run_uuid: 7aa7a2e0e4e24396b268063203b1bde6
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668973380913
+status: 3
+tags: []
+user_id: rsaha

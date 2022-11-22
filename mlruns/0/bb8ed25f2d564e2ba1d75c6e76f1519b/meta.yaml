@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/bb8ed25f2d564e2ba1d75c6e76f1519b/artifacts
+deleted_time: 1669088201047
+end_time: 1668911022322
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: bb8ed25f2d564e2ba1d75c6e76f1519b
+run_name: popular-shark-903
+run_uuid: bb8ed25f2d564e2ba1d75c6e76f1519b
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668889775430
+status: 3
+tags: []
+user_id: rsaha

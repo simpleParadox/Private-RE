@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/5f56a4f9fe18444c981dedde54a9811d/artifacts
+deleted_time: 1669088201245
+end_time: 1668831641945
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 5f56a4f9fe18444c981dedde54a9811d
+run_name: big-fawn-521
+run_uuid: 5f56a4f9fe18444c981dedde54a9811d
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668817413510
+status: 3
+tags: []
+user_id: rsaha

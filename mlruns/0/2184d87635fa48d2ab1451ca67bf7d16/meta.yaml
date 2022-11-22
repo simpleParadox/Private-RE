@@ -1,0 +1,16 @@
+artifact_uri: ./mlruns/0/2184d87635fa48d2ab1451ca67bf7d16/artifacts
+deleted_time: 1668808154582
+end_time: null
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: deleted
+run_id: 2184d87635fa48d2ab1451ca67bf7d16
+run_name: colorful-loon-301
+run_uuid: 2184d87635fa48d2ab1451ca67bf7d16
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1668714773777
+status: 1
+tags: []
+user_id: rsaha
