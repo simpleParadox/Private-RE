@@ -11,7 +11,7 @@ import torch.nn.functional as F
 # import sys
 # sys.path.append("/Users/simpleparadox/PycharmProjects/Private-RE/")
 
-from functions_st import tf_tokenizer, tf_bert_tokenize, get_bert_embeds_from_tokens
+from functions_st import tf_tokenizer, tf_bert_tokenize, get_bert_embeds_from_tokens, get_label_probs
 
 
 class erin_model(nn.Module):
@@ -69,8 +69,9 @@ def predict(model, sentence, labels, tokenizer, bert_model):
     inputs_tensor_test = torch.Tensor(last_hidden_states_test)
     test_outputs = model(inputs_tensor_test)
     _, predicted = torch.max(test_outputs.data, 1)
+    probs = test_outputs.data.numpy()
     # return labels.iloc[predicted.item(), 1]
-    return predicted.item()
+    return predicted.item(), probs
 
 
 
@@ -79,7 +80,11 @@ def main():
     st.title("Non-Private Model")
     sentence = st.text_input(label="Enter text on which RE model will be executed", placeholder="Enter text here")
     st.write(sentence)
-    non_private_predict_value = st.button("Predict")
-    if non_private_predict_value:
-        st.write(predict(model, [sentence], [], tokenizer, bert_model))
+    predict_button_value = st.button("Predict")
+    if predict_button_value:
+        predicted_class, all_probs = predict(model, [sentence], [], tokenizer, bert_model)
+        fig = get_label_probs(probs=all_probs)
+        st.write("Predicted class: ", predicted_class)
+        st.pyplot(fig, clear_figure=True)
+
 main()
