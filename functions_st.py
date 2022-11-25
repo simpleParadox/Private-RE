@@ -52,12 +52,12 @@ def tf_bert_tokenize(texts, tokenizer, max_len=512):
 def tf_tokenizer():
     m_url = "https://tfhub.dev/tensorflow/bert_en_uncased_L-12_H-768_A-12/4"
     bert_layer = hub.KerasLayer(m_url, trainable=False)
-    print("bert layer: ", bert_layer)
+    # print("bert layer: ", bert_layer)
     vocab_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
     do_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
-    print("vocab file: ", vocab_file)
+    # print("vocab file: ", vocab_file)
     tokenizer = tokenization.FullTokenizer(vocab_file, do_lower_case)
-    print("tokenizer: ", tokenizer)
+    # print("tokenizer: ", tokenizer)
     return tokenizer
 
 
@@ -69,11 +69,11 @@ def get_bert_embeds_from_tokens(bert_model, encoded_inputs):
     with torch.no_grad():
       for i in range(len(encoded_inputs)):
         encoded_input = encoded_inputs[i]
-        print("encoded_input", encoded_input)
+        # print("encoded_input", encoded_input)
         encoded_input = encoded_input.to('cpu')  # Put the encoded input on the GPU.
         outputs = bert_model(**encoded_input, output_hidden_states=True)
         hidden_states = outputs['last_hidden_state']
-        print("hidden_states", hidden_states.shape)
+        # print("hidden_states", hidden_states.shape)
         hidden_states_detached = hidden_states.detach()
         hidden_np = hidden_states_detached.numpy()
         # print("hidden np size: ", hidden_np.size())
@@ -81,7 +81,7 @@ def get_bert_embeds_from_tokens(bert_model, encoded_inputs):
         del encoded_input
         all_bert_embeds.append(hidden_np)
       # print("All bert embeds: ", all_bert_embeds)
-    print("All bert embeds: ", len(all_bert_embeds))
+    # print("All bert embeds: ", len(all_bert_embeds))
     return np.concatenate(all_bert_embeds)
 
 def bert_tokenize(texts, tokenizer):
@@ -231,6 +231,7 @@ def get_reduced_label_mappings():
 
 def get_label_probs(probs):
     label_mappings = get_reduced_label_mappings()
+    print("probs: ", probs)
     fig, ax = plt.subplots()
     ax.barh(list(label_mappings.values()), probs)
 
