@@ -36,13 +36,13 @@ class erin_model(nn.Module):
         output = F.softmax(x, 1)
         return output
 
-def load_model(private=False):
+def load_model(private=False, epsilon_value=0.5):
     # Load model
     if private:
         # Load private model
         model = erin_model(sequence_length=50, private=private)  # Using default model dimensions.
         # model.to("cpu")
-        checkpoint = torch.load("model_checkpoints/tabular_data/sgd/epoch_5_Adam_0.001_seed_2.pt", map_location=torch.device('cpu'))
+        checkpoint = torch.load(f"model_checkpoints/tabular_data/dpsgd/epoch_5_Adam_0.001_private_seed_2_epsilon_{int(epsilon_value*100.0)}.pt", map_location=torch.device('cpu'))
         # print(checkpoint['model_state_dict'].keys())
         model.load_state_dict(checkpoint['model_state_dict'])
         model.eval()
@@ -103,8 +103,9 @@ def main(model_type_selection):
             st.write("Predicted class: ", predicted_class)
             st.pyplot(fig, clear_figure=True)
     else:
-        model = load_model(True)
+        epsilon_value = st.select_slider(label='Select Epsilon', options=[0.5, 1.0, 5.0, 10.0, 20.0, 30.0, 40.0])
         st.header("Private Model")
+        model = load_model(True, epsilon_value=epsilon_value)
         sentence = st.text_input(label="Enter text on which RE model will be executed", placeholder="Enter text here")
         predict_button_value = st.button("Predict")
         if predict_button_value:
