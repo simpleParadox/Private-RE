@@ -99,7 +99,7 @@ def main(model_type_selection):
         model = load_model(False)
         if predict_button_value:
             predicted_class, all_probs = predict(model, [sentence], [], tokenizer, bert_model)
-            fig = get_label_probs(probs=all_probs)
+            fig = get_label_probs(probs=all_probs, data='Table')
             st.write("Predicted class: ", predicted_class)
             st.pyplot(fig, clear_figure=True)
     else:
@@ -110,7 +110,7 @@ def main(model_type_selection):
         predict_button_value = st.button("Predict")
         if predict_button_value:
             predicted_class, all_probs = predict(model, [sentence], tokenizer, bert_model)
-            fig = get_label_probs(probs=all_probs)
+            fig = get_label_probs(probs=all_probs, data='Table')
             st.write("Predicted class: ", predicted_class)
             st.pyplot(fig, clear_figure=True)
 

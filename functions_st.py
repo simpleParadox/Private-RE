@@ -193,44 +193,53 @@ def reformat(data, batch_size):
 
 
 
-def get_reduced_label_mappings():
-    reduced_label_mappings = {
-        0: 'None',
-        1: 'award-nominee',
-        2: 'author-works_written',
-        3: 'book-genre',
-        4: 'company-industry',
-        5: 'person-graduate',
-        6: 'actor-character',
-        7: 'director-film',
-        8: 'film-country',
-        9: 'film-genre',
-        10: 'film-language',
-        11: 'film-music',
-        12: 'film-production_company',
-        13: 'actor-film',
-        14: 'producer-film',
-        15: 'writer-film',
-        16: 'political_party-politician',
-        17: 'location-contains',
-        18: 'musician-album',
-        19: 'musician-origin',
-        20: 'person-place_of_death',
-        21: 'person-nationality',
-        22: 'person-parents',
-        23: 'person-place_of_birth',
-        24: 'person-profession',
-        25: 'person-religion',
-        26: 'person-spouse',
-        27: 'football_position-player',
-        28: 'sports_team-player'
-    }
+def get_reduced_label_mappings(data='Table'):
+    if data == 'Table':
+        reduced_label_mappings = {
+            0: 'None',
+            1: 'award-nominee',
+            2: 'author-works_written',
+            3: 'book-genre',
+            4: 'company-industry',
+            5: 'person-graduate',
+            6: 'actor-character',
+            7: 'director-film',
+            8: 'film-country',
+            9: 'film-genre',
+            10: 'film-language',
+            11: 'film-music',
+            12: 'film-production_company',
+            13: 'actor-film',
+            14: 'producer-film',
+            15: 'writer-film',
+            16: 'political_party-politician',
+            17: 'location-contains',
+            18: 'musician-album',
+            19: 'musician-origin',
+            20: 'person-place_of_death',
+            21: 'person-nationality',
+            22: 'person-parents',
+            23: 'person-place_of_birth',
+            24: 'person-profession',
+            25: 'person-religion',
+            26: 'person-spouse',
+            27: 'football_position-player',
+            28: 'sports_team-player'
+        }
+    else:
+        reduced_label_mappings = {0: 'Cause-Effect(e1,e2)', 1: 'Cause-Effect(e2,e1)', 2: 'Component-Whole(e1,e2)', 3: 'Component-Whole(e2,e1)',
+                                  4: 'Content-Container(e1,e2)', 5: 'Content-Container(e2,e1)', 6: 'Entity-Destination(e1,e2)',
+                                  7: 'Entity-Destination(e2,e1)', 8: 'Entity-Origin(e1,e2)', 9: 'Entity-Origin(e2,e1)',
+                                  10: 'Instrument-Agency(e1,e2)', 11: 'Instrument-Agency(e2,e1)', 12: 'Member-Collection(e1,e2)',
+                                  13: 'Member-Collection(e2,e1)', 14: 'Message-Topic(e1,e2)', 15: 'Message-Topic(e2,e1)',
+                                  16: 'Product-Producer(e1,e2)', 17: 'Product-Producer(e2,e1)'}
+
     return reduced_label_mappings
 
 
 
-def get_label_probs(probs):
-    label_mappings = get_reduced_label_mappings()
+def get_label_probs(probs, data='Table'):
+    label_mappings = get_reduced_label_mappings(data)
     print("probs: ", probs)
     fig, ax = plt.subplots()
     ax.barh(list(label_mappings.values()), probs)
