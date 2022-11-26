@@ -42,7 +42,17 @@ def load_model(private=False, epsilon_value=0.5):
         # Load private model
         model = erin_model(sequence_length=50, private=private)  # Using default model dimensions.
         # model.to("cpu")
-        checkpoint = torch.load(f"model_checkpoints/tabular_data/dpsgd/epoch_5_Adam_0.001_private_seed_2_epsilon_{int(epsilon_value*100.0)}.pt", map_location=torch.device('cpu'))
+        seed_epsilon_mapping_best_model = {
+            0.5: '',
+            1.0: '4',
+            5.0: '2',
+            10.0: '2',
+            20.0: '3',
+            30.0: '4',
+            40.0: '4'
+        }
+        model_seed = seed_epsilon_mapping_best_model[int(epsilon_value)]
+        checkpoint = torch.load(f"model_checkpoints/tabular_data/dpsgd/epoch_5_Adam_0.001_private_seed_{model_seed}_epsilon_{int(epsilon_value*100.0)}.pt", map_location=torch.device('cpu'))
         # print(checkpoint['model_state_dict'].keys())
         model.load_state_dict(checkpoint['model_state_dict'])
         model.eval()
