@@ -85,7 +85,7 @@ def load_model(private=False, epsilon_value='0.5'):
     return model
 
 
-@st.cache
+@st.cache(max_entries=2)
 def load_tokenizer():
     tokenizer = tf_tokenizer()
     bert_model = BertModel.from_pretrained('bert-base-uncased')
