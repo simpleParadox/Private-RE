@@ -16,7 +16,7 @@ from torch.utils.data import Dataset, DataLoader, TensorDataset
 # import sys
 # sys.path.append("/Users/simpleparadox/PycharmProjects/Private-RE/")
 
-from functions_st import tf_tokenizer, tf_bert_tokenize, get_bert_embeds_from_tokens, get_label_probs
+from functions_st import tf_tokenizer, tf_bert_tokenize, get_bert_embeds_from_tokens, get_label_probs, get_reduced_label_mappings
 
 
 class erin_model(nn.Module):
@@ -127,7 +127,8 @@ def main(model_type_selection, tokenizer, bert_model):
         if predict_button_value:
             predicted_class, all_probs = predict(model, [sentence], tokenizer, bert_model)
             fig = get_label_probs(probs=all_probs, data='Table')
-            st.write("Predicted class: ", predicted_class)
+            label_mappings = get_reduced_label_mappings()
+            st.write("Predicted class: ", label_mappings[predicted_class])
             st.pyplot(fig, clear_figure=True)
     else:
         epsilon_value = st.select_slider(label='Select Epsilon', options=['0.5', '1.0', '5.0', '10.0', '20.0', '30.0', '40.0'])
@@ -138,7 +139,8 @@ def main(model_type_selection, tokenizer, bert_model):
         if predict_button_value:
             predicted_class, all_probs = predict(model, [sentence], tokenizer, bert_model)
             fig = get_label_probs(probs=all_probs, data='Table')
-            st.write("Predicted class: ", predicted_class)
+            label_mappings = get_reduced_label_mappings()
+            st.write("Predicted class: ", label_mappings[predicted_class])
             st.pyplot(fig, clear_figure=True)
 
 
@@ -146,6 +148,6 @@ def main(model_type_selection, tokenizer, bert_model):
 tokenizer, bert_model = load_tokenizer()
 st.title("Tabular Dataset Relation Extraction")
 st.subheader('Select model type')
-model_type_selection = st.radio(label='', options=['Non-Private', 'Private'])
+model_type_selection = st.radio(label='Select model', options=['Non-Private', 'Private'])
 main(model_type_selection, tokenizer, bert_model)
 
