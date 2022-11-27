@@ -40,7 +40,7 @@ class erin_model(nn.Module):
         output = F.softmax(x, 1)
         return output
 
-
+@st.cache(ttl=24*3600)
 def load_model(private=False, epsilon_value='0.5'):
     # Load model
     if private:
