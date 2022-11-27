@@ -131,7 +131,7 @@ def main(model_type_selection):
             st.write("Predicted class: ", predicted_class)
             st.pyplot(fig, clear_figure=True)
     else:
-        epsilon_value = st.select_slider(label='Select Epsilon', options=['0.5', '1.0', '5.0', '10.0', '15.0'])
+        epsilon_value = st.select_slider(label='Select Epsilon', options=['0.5', '1.0', '5.0', '10.0', '20.0', '30.0', '40.0'])
         st.header("Private Model")
         model = load_model(True, epsilon_value=epsilon_value)
         sentence = st.text_input(label="Enter text on which RE model will be executed", placeholder="Enter text here")
