@@ -4,9 +4,13 @@ import numpy as np
 import scipy
 import torch
 import torch.nn as nn
-
+import torch.optim as optim
 from transformers import BertModel
+from opacus.layers import dp_rnn
+from opacus.privacy_engine import PrivacyEngine
 import torch.nn.functional as F
+
+from torch.utils.data import Dataset, DataLoader, TensorDataset
 
 
 # import sys
@@ -21,10 +25,10 @@ class erin_model(nn.Module):
         super(erin_model, self).__init__()
 
         # Just add one LSTM unit as the model followed by a fully connected layer and then a softmax.
-        # if private:
-        #     self.lstm = dp_rnn.DPLSTM(input_size=in_size, hidden_size=hidden_size, num_layers=1, batch_first=True)
-        # else:
-        self.lstm = nn.LSTM(input_size=in_size, hidden_size=hidden_size, num_layers=1, batch_first=True)
+        if private:
+            self.lstm = dp_rnn.DPLSTM(input_size=in_size, hidden_size=hidden_size, num_layers=1, batch_first=True)
+        else:
+            self.lstm = nn.LSTM(input_size=in_size, hidden_size=hidden_size, num_layers=1, batch_first=True)
         self.fc = nn.Linear(sequence_length * hidden_size, num_relations)
 
     def forward(self, x):
@@ -36,30 +40,44 @@ class erin_model(nn.Module):
         output = F.softmax(x, 1)
         return output
 
-def load_model(private=False, epsilon_value=0.5):
+
+def load_model(private=False, epsilon_value='0.5'):
     # Load model
     if private:
         # Load private model
-        model = erin_model(sequence_length=50, private=private)  # Using default model dimensions.
-        # model.to("cpu")
+        model = erin_model(sequence_length=50, private=True)  # Using default model dimensions.
+        model.to('cpu')
+        optimizer = optim.Adam(model.parameters(), lr=0.001)
+        train_dataset = TensorDataset(torch.Tensor(np.ones((1000, 3))), torch.Tensor(np.ones((1000, 1))))
+        train_dataloader = DataLoader(train_dataset, batch_size=1, shuffle=False)
+        privacy_engine = PrivacyEngine()
+        model, optimizer, train_dataloader_poisson = privacy_engine.make_private_with_epsilon(
+            module=model,
+            optimizer=optimizer,
+            data_loader=train_dataloader,
+            target_epsilon=float(epsilon_value),
+            target_delta=1/6590,
+            epochs=5,
+            max_grad_norm=1.0
+        )
         seed_epsilon_mapping_best_model = {
-            0.5: '',
-            1.0: '4',
-            5.0: '2',
-            10.0: '2',
-            20.0: '3',
-            30.0: '4',
-            40.0: '4'
+            '0.5': '3',
+            '1.0': '4',
+            '5.0': '2',
+            '10.0': '2',
+            '20.0': '3',
+            '30.0': '4',
+            '40.0': '4'
         }
-        model_seed = seed_epsilon_mapping_best_model[int(epsilon_value)]
-        checkpoint = torch.load(f"model_checkpoints/tabular_data/dpsgd/epoch_5_Adam_0.001_private_seed_{model_seed}_epsilon_{int(epsilon_value*100.0)}.pt", map_location=torch.device('cpu'))
+        model_seed = seed_epsilon_mapping_best_model[epsilon_value]
+        checkpoint = torch.load(f"model_checkpoints/tabular_data/dpsgd/epoch_5_Adam_0.001_private_seed_{model_seed}_epsilon_{int(float(epsilon_value)*100.0)}.pt", map_location=torch.device('cpu'))
         # print(checkpoint['model_state_dict'].keys())
         model.load_state_dict(checkpoint['model_state_dict'])
         model.eval()
     else:
         # Load non-private model
         model = erin_model(sequence_length=50, private=private) # Using default model dimensions.
-        # model.to("cpu")
+        model.to("cpu")
         checkpoint = torch.load("model_checkpoints/tabular_data/sgd/epoch_5_Adam_0.001_seed_2.pt", map_location=torch.device('cpu'))
         # print(checkpoint['model_state_dict'].keys())
         model.load_state_dict(checkpoint['model_state_dict'])
@@ -108,12 +126,12 @@ def main(model_type_selection):
         predict_button_value = st.button("Predict")
         model = load_model(False)
         if predict_button_value:
-            predicted_class, all_probs = predict(model, [sentence], [], tokenizer, bert_model)
+            predicted_class, all_probs = predict(model, [sentence], tokenizer, bert_model)
             fig = get_label_probs(probs=all_probs, data='Table')
             st.write("Predicted class: ", predicted_class)
             st.pyplot(fig, clear_figure=True)
     else:
-        epsilon_value = st.select_slider(label='Select Epsilon', options=[0.5, 1.0, 5.0, 10.0, 15.0])
+        epsilon_value = st.select_slider(label='Select Epsilon', options=['0.5', '1.0', '5.0', '10.0', '15.0'])
         st.header("Private Model")
         model = load_model(True, epsilon_value=epsilon_value)
         sentence = st.text_input(label="Enter text on which RE model will be executed", placeholder="Enter text here")
@@ -130,3 +148,4 @@ st.title("Tabular Dataset Relation Extraction")
 st.subheader('Select model type')
 model_type_selection = st.radio(label='', options=['Non-Private', 'Private'])
 main(model_type_selection)
+

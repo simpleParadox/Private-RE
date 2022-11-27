@@ -10,3 +10,4 @@ protobuf==3.19.0
 click==8
 matplotlib
 scipy
+opacus
