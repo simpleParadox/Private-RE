@@ -40,7 +40,7 @@ class erin_model(nn.Module):
         output = F.softmax(x, 1)
         return output
 
-@st.cache(ttl=24*3600)
+@st.cache(ttl=15*3600)
 def load_model(private=False, epsilon_value='0.5'):
     # Load model
     if private:
@@ -85,7 +85,7 @@ def load_model(private=False, epsilon_value='0.5'):
     return model
 
 
-@st.cache(max_entries=2)
+@st.cache(max_entries=1)
 def load_tokenizer():
     tokenizer = tf_tokenizer()
     bert_model = BertModel.from_pretrained('bert-base-uncased')
