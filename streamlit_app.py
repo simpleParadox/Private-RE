@@ -48,7 +48,7 @@ def load_model(private=False, epsilon_value='0.5'):
         model = erin_model(sequence_length=50, private=True)  # Using default model dimensions.
         model.to('cpu')
         optimizer = optim.Adam(model.parameters(), lr=0.001)
-        train_dataset = TensorDataset(torch.Tensor(np.ones((1000, 3))), torch.Tensor(np.ones((1000, 1))))
+        train_dataset = TensorDataset(torch.Tensor(np.random.random_sample((4000, 768))), torch.Tensor(np.random.random_sample((4000, 1))))
         train_dataloader = DataLoader(train_dataset, batch_size=1, shuffle=False)
         privacy_engine = PrivacyEngine()
         model, optimizer, train_dataloader_poisson = privacy_engine.make_private_with_epsilon(
@@ -115,8 +115,7 @@ def predict(model, sentence, tokenizer, bert_model):
 
 
 
-def main(model_type_selection):
-    tokenizer, bert_model = load_tokenizer()
+def main(model_type_selection, tokenizer, bert_model):
 
 
     # st.write(sentence)
@@ -144,8 +143,9 @@ def main(model_type_selection):
 
 
 
+tokenizer, bert_model = load_tokenizer()
 st.title("Tabular Dataset Relation Extraction")
 st.subheader('Select model type')
 model_type_selection = st.radio(label='', options=['Non-Private', 'Private'])
-main(model_type_selection)
+main(model_type_selection, tokenizer, bert_model)
 
