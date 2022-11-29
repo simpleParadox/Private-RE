@@ -85,7 +85,7 @@ python main.py
 ### Hyperparameter comparison
 
 | Hyperparameter              |Data: Table / Semeval         |
-|:---------------------------:|:--------:|:-----------------:|
+|:---------------------------:|:----------------------------:|
 | LSTM/BiLSTM units           | 1                            |
 | Batch Size                  | 16 / 8                       |
 | Optimizer                   | Adam                         |
