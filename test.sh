@@ -16,7 +16,7 @@ module load cuda cudnn
 source ~/DP_RE/bin/activate
 # python store_embeds.py
 # python project_622_semeval.py 5 $SLURM_ARRAY_TASK_ID
-python project_622_semeval.py
+python project_622_semeval.py 10.0 5 $SLURM_ARRAY_TASK_ID
 
 #### For testing purposes only.
 ###### salloc --cpus-per-task=1 --account=def-afyshe-ab --time=00:30:10 --mem=6G --gres=gpu:a100:1

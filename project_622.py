@@ -51,15 +51,30 @@ import sys
 from functions import get_bert_embeds_from_tokens, bert_tokenize, load_table_data, load_semeval_data, tf_tokenizer, tf_bert_tokenize, reformat
 from custom_dataset import TableDataset
 
+import argparse
+
+# Parsing command line arguments.
+parser = argparse.ArgumentParser(description='Train the private or non-private version of the model. By default, the non-private model is trained.')
+parser.add_argument('-p','--private', default=False,  help="Boolean, True or False. Default=False")
+parser.add_argument('-eps','--epsilon', default=1.0, help="Float in the range [0.5, Infinity]. Default=1.0. If --private is False, this is ignored")
+parser.add_argument('-e', '--epochs', default=5, help='Integer. Number of epochs. Default=5')
+parser.add_argument('-s', '--seed', default=1, help='Integer. Seed for reproducibility. Default=1')
+
+args = vars(parser.parse_args())
+print("You selected the following parameters to run the script.")
+print(args)
+
 
 # Using gpu if available.
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
-epsilon_arg = float(sys.argv[1])  # This is the noise_multiplier argument.
+epsilon_arg = float(args['epsilon'])  # This is the noise_multiplier argument.
 print("Epsilon arg: ", epsilon_arg)
-epoch_arg = int(sys.argv[2])  # This is the epoch argument.
-seed_arg = int(sys.argv[3])
+epoch_arg = int(args['epochs'])  # This is the epoch argument.
+seed_arg = int(args['seed'])
 print("Seed arg: ", seed_arg)
+private_arg = False if args['private']=='False' else True
+print("Is private: ", private_arg)
 
 
 """## Model definition and training
@@ -116,8 +131,8 @@ batch_size = 16
 epochs = epoch_arg
 optimizer_name = "Adam" # DP-SGD, DP-Adam, Adam, SGD
 learning_rate = 0.001
-load_epochs = epochs - 5
-make_private = False
+load_epochs = epochs - epochs
+make_private = private_arg
 EPSILON = epsilon_arg
 DELTA = 1e-5
 MAX_GRAD_NORM = 1.0
