@@ -22,11 +22,6 @@ conda activate DP_RE
 ```
 Now inside the 'DP_RE' conda environment, install the following packages. Follow pip installation guidelines. If using Anaconda package manager, use conda to install packages, but generally pip should work.
 
-Python data science stack.
-```
-TODO
-```
-Extra packages. 
 1. Tensorflow >=2.5.0 
 NOTE: Install the GPU version if you want to run using the GPU.
 Follow this tutorial for details: https://www.tensorflow.org/install/pip
@@ -55,17 +50,17 @@ pip install -U scikit-learn
 pip install transformers
 ```
 7. MLFlow (for model tracking)
-'''
+```
 pip install mlflow
-'''
+```
 8. Opacus (for differentially private optimizers)
-'''
+```
 pip install opacus
-'''
+```
 9. Torchinfo (to summarize pytorch models)
-'''
+```
 pip install torchinfo
-'''
+```
 
 10. Other general packages.
 ```
