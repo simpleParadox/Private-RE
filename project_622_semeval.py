@@ -40,7 +40,7 @@ import argparse
 # Parsing command line arguments.
 parser = argparse.ArgumentParser(description='Train the private or non-private version of the model. By default, the non-private model is trained.')
 parser.add_argument('-p','--private', default=False,  help="Boolean, True or False. Default=False")
-parser.add_argument('-eps','--epsilon', default=1.0, help="Float in the range [0.5, Infinity]. Default=1.0. If --private is False, this is ignored")
+parser.add_argument('-eps','--epsilon', default=1.0, help="Float in the range [0.5, Infinity]. Default=1.0. If --private is False, this is ignored.")
 parser.add_argument('-e', '--epochs', default=5, help='Integer. Number of epochs. Default=5')
 parser.add_argument('-s', '--seed', default=1, help='Integer. Seed for reproducibility. Default=1')
 
