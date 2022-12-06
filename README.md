@@ -123,7 +123,7 @@ mlflow ui
 ```
 This will open up mlflow and you can track the experiments.
 
-### Stremlit demo
+### Streamlit demo
 Create a seperate conda environment and activate
 Then install the requirements from the requirements.txt file.
 NOTE: The packages in the requirements.txt file is only for the streamlit demo. For running the actual code, please follow the package installation steps in the previous section. The packages in the requirements.txt are only for the demo. Using the installed packages from the requirements.txt to run the actual training code may lead to errors.
