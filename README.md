@@ -77,10 +77,6 @@ pip install argparse
 
 
 NOTE: If you want to create a demo for the trained model, you need streamlit. No need to install if demo is not required. This is **optional**. IF you choose to run the demo, then follow the instruction provided in the Streamlit demo section.
-```
-pip install streamlit
-```
-
 
 ### Instructions to run the code.
 
