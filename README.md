@@ -3,7 +3,7 @@
 ### This repo contains the code for our project in CMPUT 622 Fall 2022.
 Relation Extraction using Differential Privacy
 ### Datasets:
-1. Semeval 2010 Task 8
+1. Semeval 2010 Task 8 - https://aclanthology.org/S10-1006/
 2. Macdonald and Barbosa 2020 - https://doi.org/10.7939/DVN/SHL1SL
 
 
