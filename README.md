@@ -146,8 +146,12 @@ pip install -r requirements.txt
 | Epochs                      | 5 / 100                      |
  
  
-### Results (add the images)
-TODO: show private results for table data
-TODO: show private results for semeval data.
+### Results
+Results for the Table data.
 
-![Results - Private vs Non-Private results for the table data.](images/Private - Accuracy_F1 vs Epsilon for Table.png)
+![Results - Private vs Non-Private results for the Table data.](https://github.com/simpleParadox/Private-RE/blob/main/images/Private%20-%20Accuracy_F1%20vs%20Epsilon%20for%20Table.png?raw=true)
+
+
+Results for the Semeval data.
+
+![Results - Private vs Non-Private results for the Semeval data.](https://github.com/simpleParadox/Private-RE/blob/main/images/Private%20-%20Accuracy_F1%20vs%20Epsilon%20for%20Semeval.png?raw=true)
