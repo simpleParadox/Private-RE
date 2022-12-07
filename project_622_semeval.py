@@ -67,7 +67,7 @@ sequence_max_length = 80
 
 
 class erin_model(nn.Module):
-    def __init__(self, in_size=768, hidden_size: int = 1, num_relations: int = 19, sequence_length:int = sequence_max_length, private=False):
+    def __init__(self, in_size=768, hidden_size: int = 1, num_relations: int = 18, sequence_length:int = sequence_max_length, private=False):
         super(erin_model,self).__init__()
         
         # Just add one LSTM unit as the model followed by a fully connected layer and then a softmax.
