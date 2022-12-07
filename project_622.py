@@ -195,6 +195,8 @@ for seed in seeds:
     # Specifying this to make sure that we are using the whole dataset.
     X_train_subset = X_train
     y_train_subset = y_train_classes
+
+    DELTA = 1 / len(X_train)
     
     print("Encoding training data.")
     all_train_tokens = []
