@@ -207,6 +207,9 @@ for seed in seeds:
     # Specifying this to make sure that we are using the whole dataset.
     X_train_subset = X_train
     y_train_subset = y_train_classes
+
+    DELTA = 1 / len(X_train)
+    
     
     print("Encoding training data.")
     all_train_tokens = []
@@ -228,13 +231,14 @@ for seed in seeds:
 
     if make_private:
         privacy_engine = PrivacyEngine()
-        model, optimizer, train_dataloader = privacy_engine.make_private(
+        model, optimizer, train_dataloader_poisson = privacy_engine.make_private_with_epsilon(
             module=model,
             optimizer=optimizer,
             data_loader=train_dataloader,
-            noise_multiplier=NOISE_MULTIPLIER,
-            max_grad_norm=MAX_GRAD_NORM,
-            poisson_sampling=False
+            target_epsilon=EPSILON,
+            target_delta=DELTA,
+            epochs = epochs,
+            max_grad_norm=MAX_GRAD_NORM
         )
         if load_epochs > 0:
             print(f"Load model from {model_load_path}")
