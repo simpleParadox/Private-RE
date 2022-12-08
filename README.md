@@ -45,7 +45,7 @@ conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvi
 ```
 pip install -U scikit-learn
 ```
-6. Transformers
+6. Transformers (for loading pretrained BERT model.)
 ```
 pip install transformers
 ```
