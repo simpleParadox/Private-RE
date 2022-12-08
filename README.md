@@ -13,7 +13,7 @@ BERT + 1 LSTM unit + Fully Connected
 
 ### Package installation.
 
-First create a new conda environment using the following (make sure you have [Anaconda](https://www.anaconda.com/) installed.)
+First create a new conda environment using the following (make sure you have [Anaconda](https://www.anaconda.com/) installed.). We used python version 3.9 for our project.
 ```
 conda create --name DP_RE python=3.9
 ```
